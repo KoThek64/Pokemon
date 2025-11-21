@@ -1,8 +1,6 @@
-package Modeles
+package Modeles.Class
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import java.io.File
 
 @Serializable
 data class Pokedex(

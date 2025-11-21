@@ -1,4 +1,6 @@
-package Modeles
+package Modeles.Class
+
+import Modeles.Interface.Combattant
 
 class Adversaire(
     override val nom: String,

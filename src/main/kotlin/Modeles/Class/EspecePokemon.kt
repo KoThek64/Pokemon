@@ -1,5 +1,7 @@
-package Modeles
+package Modeles.Class
 
+import Modeles.Enum.Capacitee
+import Modeles.Enum.Type
 import kotlinx.serialization.Serializable
 
 @Serializable

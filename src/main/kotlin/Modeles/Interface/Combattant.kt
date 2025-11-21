@@ -1,4 +1,6 @@
-package Modeles
+package Modeles.Interface
+
+import Modeles.Class.Pokemon
 
 interface Combattant {
     val nom : String
