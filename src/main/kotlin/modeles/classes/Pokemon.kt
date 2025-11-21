@@ -1,6 +1,6 @@
-package Modeles.Class
+package modeles.classes
 
-import Modeles.Enum.Capacitee
+import modeles.enums.Capacitee
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,4 +10,8 @@ data class Pokemon(
     var stats: Stats,
     var pvActuels: Int,
     var competences: MutableList<Capacitee>
-)
+){
+    fun calculerStatsPokemon(espece : EspecePokemon, niveau: Int) : Stats{
+
+    }
+}

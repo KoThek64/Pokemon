@@ -1,4 +1,4 @@
-package Modeles.Enum
+package modeles.enums
 
 import kotlinx.serialization.Serializable
 
