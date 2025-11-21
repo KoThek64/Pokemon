@@ -43,3 +43,33 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Kotlin / JVM
+*.class
+*.jar
+*.war
+*.ear
+*.kotlin_module
+
+# Build directories
+/build/
+target/
+
+# Gradle
+.gradle/
+gradle-app.setting
+
+# Logs
+*.log
+
+# IntelliJ IDEA / JetBrains
+.idea/
+
+# OS files
+Thumbs.db
+
+# Kotlin Native (si jamais)
+konan/**
+
+# Cache
+.cache/
