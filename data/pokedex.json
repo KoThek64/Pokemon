@@ -1,0 +1,34 @@
+{
+  "especes": [
+    {
+      "id": 25,
+      "nom": "Pikachu",
+      "types": ["ELECTRIQUE"],
+      "baseStats": {
+        "pv": 35,
+        "attaque": 55,
+        "defense": 40,
+        "attaqueSpe": 50,
+        "defenseSpe": 50,
+        "vitesse": 90
+      },
+      "description": "Un Pokémon souris qui accumule l'électricité.",
+      "capacitesDeBase": ["CHARGE", "ATTAQUE_ECLAIR"]
+    },
+    {
+      "id": 4,
+      "nom": "Salamèche",
+      "types": ["FEU"],
+      "baseStats": {
+        "pv": 39,
+        "attaque": 52,
+        "defense": 43,
+        "attaqueSpe": 60,
+        "defenseSpe": 50,
+        "vitesse": 65
+      },
+      "description": "La flamme sur sa queue indique sa santé.",
+      "capacitesDeBase": ["CHARGE"]
+    }
+  ]
+}

@@ -1,17 +1,12 @@
 package Modeles
 
-class Pokemon(
-    val nom: String,
-    val types: MutableList<Type>,
-    val niveau: Int,
-    val competences: MutableList<Capacitee>,
-    val statistiques: MutableList<Int>,
-    val description: String
-){
+import kotlinx.serialization.Serializable
 
-
-
-    override fun toString(): String {
-        return "$nom est de niveau : $niveau, il possède les capacités : $competences, il est de type : $types"
-    }
-}
+@Serializable
+data class Pokemon(
+    val espece: EspecePokemon,
+    var niveau: Int,
+    var stats: Stats,
+    var pvActuels: Int,
+    var competences: MutableList<Capacitee>
+)

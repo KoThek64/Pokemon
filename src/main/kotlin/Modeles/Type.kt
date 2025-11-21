@@ -1,5 +1,8 @@
 package Modeles
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class Type {
     EAU,
     FEU,
