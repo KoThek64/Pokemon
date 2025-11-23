@@ -14,5 +14,5 @@ fun main(){
     println(pikachu.competences)
 
     val pikachu2 = Pokemon.creer(pikachuEspece, niveau)
-    println(pikachu.espece.types)
+    println(pikachu2.espece.types)
 }

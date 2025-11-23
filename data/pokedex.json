@@ -1,19 +1,49 @@
 {
   "especes": [
     {
-      "id": 25,
-      "nom": "Pikachu",
-      "types": ["ELECTRIQUE"],
+      "id": 1,
+      "nom": "Bulbizarre",
+      "types": ["PLANTE", "POISON"],
       "baseStats": {
-        "pv": 35,
-        "attaque": 55,
-        "defense": 40,
-        "attaqueSpe": 50,
-        "defenseSpe": 50,
-        "vitesse": 90
+        "pv": 45,
+        "attaque": 49,
+        "defense": 49,
+        "attaqueSpe": 65,
+        "defenseSpe": 65,
+        "vitesse": 45
       },
-      "description": "Un Pokémon souris qui accumule l'électricité.",
-      "capacitesDeBase": ["CHARGE", "ATTAQUE_ECLAIR"]
+      "description": "Un Pokémon plante qui porte un bulbe sur son dos.",
+      "capacitesDeBase": ["CHARGE"]
+    },
+    {
+      "id": 2,
+      "nom": "Herbizarre",
+      "types": ["PLANTE", "POISON"],
+      "baseStats": {
+        "pv": 60,
+        "attaque": 62,
+        "defense": 63,
+        "attaqueSpe": 80,
+        "defenseSpe": 80,
+        "vitesse": 60
+      },
+      "description": "L'évolution de Bulbizarre, son bulbe commence à s’ouvrir.",
+      "capacitesDeBase": ["CHARGE"]
+    },
+    {
+      "id": 3,
+      "nom": "Florizarre",
+      "types": ["PLANTE", "POISON"],
+      "baseStats": {
+        "pv": 80,
+        "attaque": 82,
+        "defense": 83,
+        "attaqueSpe": 100,
+        "defenseSpe": 100,
+        "vitesse": 80
+      },
+      "description": "Une grande fleur a éclos sur son dos.",
+      "capacitesDeBase": ["CHARGE"]
     },
     {
       "id": 4,
@@ -27,8 +57,98 @@
         "defenseSpe": 50,
         "vitesse": 65
       },
-      "description": "La flamme sur sa queue indique sa santé.",
+      "description": "Un petit Pokémon feu, la flamme au bout de sa queue reflète sa santé.",
       "capacitesDeBase": ["CHARGE"]
+    },
+    {
+      "id": 5,
+      "nom": "Reptincel",
+      "types": ["FEU"],
+      "baseStats": {
+        "pv": 58,
+        "attaque": 64,
+        "defense": 58,
+        "attaqueSpe": 80,
+        "defenseSpe": 65,
+        "vitesse": 80
+      },
+      "description": "L’évolution de Salamèche, plus agressif et plus puissant.",
+      "capacitesDeBase": ["CHARGE"]
+    },
+    {
+      "id": 6,
+      "nom": "Dracaufeu",
+      "types": ["FEU", "VOL"],
+      "baseStats": {
+        "pv": 78,
+        "attaque": 84,
+        "defense": 78,
+        "attaqueSpe": 109,
+        "defenseSpe": 85,
+        "vitesse": 100
+      },
+      "description": "Un grand dragon qui crache des flammes brûlant tout sur leur passage.",
+      "capacitesDeBase": ["CHARGE"]
+    },
+    {
+      "id": 7,
+      "nom": "Carapuce",
+      "types": ["EAU"],
+      "baseStats": {
+        "pv": 44,
+        "attaque": 48,
+        "defense": 65,
+        "attaqueSpe": 50,
+        "defenseSpe": 64,
+        "vitesse": 43
+      },
+      "description": "Un Pokémon tortue qui se protège dans sa carapace.",
+      "capacitesDeBase": ["CHARGE"]
+    },
+    {
+      "id": 8,
+      "nom": "Carabaffe",
+      "types": ["EAU"],
+      "baseStats": {
+        "pv": 59,
+        "attaque": 63,
+        "defense": 80,
+        "attaqueSpe": 65,
+        "defenseSpe": 80,
+        "vitesse": 58
+      },
+      "description": "L’évolution de Carapuce, plus robuste et expérimenté.",
+      "capacitesDeBase": ["CHARGE"]
+    },
+    {
+      "id": 9,
+      "nom": "Tortank",
+      "types": ["EAU"],
+      "baseStats": {
+        "pv": 79,
+        "attaque": 83,
+        "defense": 100,
+        "attaqueSpe": 85,
+        "defenseSpe": 105,
+        "vitesse": 78
+      },
+      "description": "Un Pokémon imposant équipé de canons sur sa carapace.",
+      "capacitesDeBase": ["CHARGE"]
+    },
+    {
+      "id": 25,
+      "nom": "Pikachu",
+      "types": ["ELECTRIQUE"],
+      "baseStats": {
+        "pv": 35,
+        "attaque": 55,
+        "defense": 40,
+        "attaqueSpe": 50,
+        "defenseSpe": 50,
+        "vitesse": 90
+      },
+      "description": "Un Pokémon souris qui stocke de l’électricité dans ses joues.",
+      "capacitesDeBase": ["CHARGE", "ATTAQUE_ECLAIR"]
     }
   ]
 }
