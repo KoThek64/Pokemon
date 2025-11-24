@@ -1,4 +1,4 @@
-package Modeles.Enum
+package modeles.enums
 
 import kotlinx.serialization.Serializable
 
@@ -6,4 +6,7 @@ import kotlinx.serialization.Serializable
 enum class Capacitee {
     CHARGE,
     ATTAQUE_ECLAIR,
+    GRIFFE,
+    FOUET_LIANE,
+    LANCE_FLAMME
 }
