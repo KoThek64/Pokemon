@@ -43,9 +43,6 @@ data class Pokemon(
         }
     }
 
-
-
-
     fun apprendreCapacitee(capacitee: Capacitee) : Boolean{
         if (competences.size == 4 || competences.contains(capacitee)){
             return false
