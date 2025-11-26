@@ -2,6 +2,7 @@ package modeles.classes
 
 import modeles.enums.Capacitee
 import kotlinx.serialization.Serializable
+import modeles.exceptions.CapaciteeException
 
 @Serializable
 data class Pokemon(
@@ -44,8 +45,10 @@ data class Pokemon(
     }
 
     fun apprendreCapacitee(capacitee: Capacitee) : Boolean{
-        if (competences.size == 4 || competences.contains(capacitee)){
-            return false
+        if (competences.contains(capacitee)){
+            throw CapaciteeException("On ne peut pas apprendre deux fois la même capacitée")
+        } else if (competences.size == 4){
+            throw CapaciteeException("On ne peut pas avoir plus de 4 capacitées")
         }
         competences.add(capacitee)
         return true
@@ -53,7 +56,10 @@ data class Pokemon(
 
     fun oublierCapacitee(capacitee: Capacitee) : Boolean{
         if (!competences.contains(capacitee)){
-            return false
+            throw CapaciteeException("On ne peut pas oublier une capacitée qui n'existe pas")
+        }
+        if (competences.size == 1){
+            throw CapaciteeException("On est obligé de garder au moins une capacitée")
         }
 
         competences.remove(capacitee)

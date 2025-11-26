@@ -15,6 +15,7 @@ fun main() {
     println(pikachu.competences)
 
     val pikachu2 = Pokemon.creer(pikachuEspece, niveau)
+    println(pikachu2.stats)
     println(pikachu2.espece.types)
 
     val salamecheEspece = pokedex.especes.first { it.nom == "Salamèche" }
