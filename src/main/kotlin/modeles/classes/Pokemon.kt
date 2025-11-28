@@ -3,6 +3,7 @@ package modeles.classes
 import modeles.enums.Capacitee
 import kotlinx.serialization.Serializable
 import modeles.exceptions.CapaciteeException
+import modeles.exceptions.NiveauException
 
 @Serializable
 data class Pokemon(
@@ -68,7 +69,7 @@ data class Pokemon(
 
     fun monterDeNiveau() : Boolean{
         if (niveau == 100){
-            return false
+            throw NiveauException("On ne peut pas monter plus haut de niveau après 100")
         }
 
         niveau++
