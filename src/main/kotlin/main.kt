@@ -22,7 +22,14 @@ fun main() {
     println(joueur1.equipe)
     joueur1.supprimerPokemon(pikachu2)
     println(joueur1.equipe)
-    joueur1.supprimerPokemon(pikachu)
-    println(joueur1.equipe)
+
+    println(joueur1.aEncoreDesPokemon())
+    println(joueur1.getPokemonActif())
+
+    joueur1.ajouterPokemon(pikachu2)
+    println(joueur1.changerPokemonActif(1))
+    println(joueur1.getPokemonActif())
+
+    println(pokedex.trouverEspeceParID(255))
 
 }
