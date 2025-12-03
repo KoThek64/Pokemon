@@ -4,6 +4,7 @@ import modeles.enums.Capacitee
 import kotlinx.serialization.Serializable
 import modeles.exceptions.CapaciteeException
 import modeles.exceptions.NiveauException
+import modeles.exceptions.PVException
 
 @Serializable
 data class Pokemon(
@@ -11,7 +12,8 @@ data class Pokemon(
     var niveau: Int,
     var stats: Stats,
     var pvActuels: Int,
-    var competences: MutableList<Capacitee>
+    var competences: MutableList<Capacitee>,
+    var estKo: Boolean
 ){
     companion object{
         fun creer(espece: EspecePokemon, niveau: Int) : Pokemon{
@@ -21,7 +23,8 @@ data class Pokemon(
                 niveau,
                 stats,
                 stats.pv,
-                espece.capacitesDeBase
+                espece.capacitesDeBase,
+                false
             )
         }
 
@@ -77,4 +80,40 @@ data class Pokemon(
         pvActuels = stats.pv
         return true
     }
+
+    fun subirDegats(degats: Int) : Int{
+        if (pvActuels == 0){
+            throw PVException("La vie du pokémon est déjà à 0")
+        }
+        if (pvActuels <= degats){
+            pvActuels = 0
+            estKo = true
+            return 0
+        }
+        pvActuels-=degats
+        return pvActuels
+    }
+
+    fun soigner(pv: Int) : Int{
+        estKo = false
+        if (pvActuels == stats.pv){
+            throw PVException("La vie du pokémon ne peut pas être plus grand que ses stats")
+        }
+        if (pv >= stats.pv-pvActuels){
+            pvActuels = stats.pv
+            return pvActuels
+        }
+        pvActuels += pv
+        return pvActuels
+    }
+
+    fun soinTotal() : Int{
+        estKo = false
+        if (pvActuels == stats.pv){
+            throw PVException("La vie du pokémon est déjà au maximum")
+        }
+        pvActuels = stats.pv
+        return pvActuels
+    }
+
 }
