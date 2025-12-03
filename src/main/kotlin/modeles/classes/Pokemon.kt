@@ -2,6 +2,9 @@ package modeles.classes
 
 import modeles.enums.Capacitee
 import kotlinx.serialization.Serializable
+import modeles.exceptions.CapaciteeException
+import modeles.exceptions.NiveauException
+import modeles.exceptions.PVException
 
 @Serializable
 data class Pokemon(
@@ -9,7 +12,8 @@ data class Pokemon(
     var niveau: Int,
     var stats: Stats,
     var pvActuels: Int,
-    var competences: MutableList<Capacitee>
+    var competences: MutableList<Capacitee>,
+    var estKo: Boolean
 ){
     companion object{
         fun creer(espece: EspecePokemon, niveau: Int) : Pokemon{
@@ -19,7 +23,8 @@ data class Pokemon(
                 niveau,
                 stats,
                 stats.pv,
-                espece.capacitesDeBase
+                espece.capacitesDeBase,
+                false
             )
         }
 
@@ -44,8 +49,10 @@ data class Pokemon(
     }
 
     fun apprendreCapacitee(capacitee: Capacitee) : Boolean{
-        if (competences.size == 4 || competences.contains(capacitee)){
-            return false
+        if (competences.contains(capacitee)){
+            throw CapaciteeException("On ne peut pas apprendre deux fois la même capacitée")
+        } else if (competences.size == 4){
+            throw CapaciteeException("On ne peut pas avoir plus de 4 capacitées")
         }
         competences.add(capacitee)
         return true
@@ -53,7 +60,10 @@ data class Pokemon(
 
     fun oublierCapacitee(capacitee: Capacitee) : Boolean{
         if (!competences.contains(capacitee)){
-            return false
+            throw CapaciteeException("On ne peut pas oublier une capacitée qui n'existe pas")
+        }
+        if (competences.size == 1){
+            throw CapaciteeException("On est obligé de garder au moins une capacitée")
         }
 
         competences.remove(capacitee)
@@ -62,7 +72,7 @@ data class Pokemon(
 
     fun monterDeNiveau() : Boolean{
         if (niveau == 100){
-            return false
+            throw NiveauException("On ne peut pas monter plus haut de niveau après 100")
         }
 
         niveau++
@@ -70,4 +80,40 @@ data class Pokemon(
         pvActuels = stats.pv
         return true
     }
+
+    fun subirDegats(degats: Int) : Int{
+        if (pvActuels == 0){
+            throw PVException("La vie du pokémon est déjà à 0")
+        }
+        if (pvActuels <= degats){
+            pvActuels = 0
+            estKo = true
+            return 0
+        }
+        pvActuels-=degats
+        return pvActuels
+    }
+
+    fun soigner(pv: Int) : Int{
+        estKo = false
+        if (pvActuels == stats.pv){
+            throw PVException("La vie du pokémon ne peut pas être plus grand que ses stats")
+        }
+        if (pv >= stats.pv-pvActuels){
+            pvActuels = stats.pv
+            return pvActuels
+        }
+        pvActuels += pv
+        return pvActuels
+    }
+
+    fun soinTotal() : Int{
+        estKo = false
+        if (pvActuels == stats.pv){
+            throw PVException("La vie du pokémon est déjà au maximum")
+        }
+        pvActuels = stats.pv
+        return pvActuels
+    }
+
 }
