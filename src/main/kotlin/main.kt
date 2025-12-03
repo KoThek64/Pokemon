@@ -1,5 +1,6 @@
 import modeles.classes.*
 import modeles.enums.Capacitee
+import modeles.enums.Type
 
 fun main() {
     val pokedex = Pokedex.chargerDepuisFichier("data/pokedex.json")
@@ -30,6 +31,8 @@ fun main() {
     println(joueur1.changerPokemonActif(1))
     println(joueur1.getPokemonActif())
 
-    println(pokedex.trouverEspeceParID(255))
+    println(pokedex.trouverEspeceParID(25))
+    println(pokedex.trouverEspeceParNom("Salamèche"))
+    println(pokedex.rechercherParType(Type.EAU))
 
 }

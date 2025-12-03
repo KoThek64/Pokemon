@@ -2,6 +2,7 @@ package modeles.classes
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import modeles.enums.Type
 import modeles.exceptions.PokedexException
 import java.io.File
 
@@ -24,5 +25,29 @@ data class Pokedex(
         }
 
         return espece
+    }
+
+    fun trouverEspeceParNom(nom : String) : EspecePokemon{
+        val espece : EspecePokemon? = especes.firstOrNull { it.nom == nom }
+
+        if (espece == null){
+            throw PokedexException("Le pokémon avec le nom $nom n'est pas dans le pokédex")
+        }
+
+        return espece
+    }
+
+    fun rechercherParType(type: Type): List<EspecePokemon> {
+        val tab = mutableListOf<EspecePokemon>()
+        for (i in 0 until especes.size){
+            if (especes[i].types.contains(type)){
+                tab.add(especes[i])
+            }
+        }
+        return tab.sortedBy { it.id }
+    }
+
+    fun all(): List<EspecePokemon>{
+        return especes
     }
 }
