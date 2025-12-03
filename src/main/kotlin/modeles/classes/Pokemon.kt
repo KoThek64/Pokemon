@@ -13,7 +13,6 @@ data class Pokemon(
     var stats: Stats,
     var pvActuels: Int,
     var competences: MutableList<Capacitee>,
-    var estKo: Boolean
 ){
     companion object{
         fun creer(espece: EspecePokemon, niveau: Int) : Pokemon{
@@ -23,8 +22,7 @@ data class Pokemon(
                 niveau,
                 stats,
                 stats.pv,
-                espece.capacitesDeBase,
-                false
+                espece.capacitesDeBase.toMutableList(),
             )
         }
 
@@ -87,7 +85,6 @@ data class Pokemon(
         }
         if (pvActuels <= degats){
             pvActuels = 0
-            estKo = true
             return 0
         }
         pvActuels-=degats
@@ -95,7 +92,6 @@ data class Pokemon(
     }
 
     fun soigner(pv: Int) : Int{
-        estKo = false
         if (pvActuels == stats.pv){
             throw PVException("La vie du pokémon ne peut pas être plus grand que ses stats")
         }
@@ -108,12 +104,15 @@ data class Pokemon(
     }
 
     fun soinTotal() : Int{
-        estKo = false
         if (pvActuels == stats.pv){
             throw PVException("La vie du pokémon est déjà au maximum")
         }
         pvActuels = stats.pv
         return pvActuels
+    }
+
+    fun estKO(): Boolean{
+        return pvActuels == 0
     }
 
 }

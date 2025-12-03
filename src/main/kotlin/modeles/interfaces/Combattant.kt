@@ -27,7 +27,7 @@ interface Combattant {
             throw EquipePokemonException("Pas de pokémon dans son equipe")
         }
         for (i in 0 until equipe.size){
-            if (!equipe[i].estKo){
+            if (!equipe[i].estKO()){
                 return true
             }
         }

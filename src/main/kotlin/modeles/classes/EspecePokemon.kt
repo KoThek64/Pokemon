@@ -11,5 +11,5 @@ data class EspecePokemon(
     val types: List<Type>,
     val baseStats: Stats,
     val description: String,
-    val capacitesDeBase: MutableList<Capacitee>
+    val capacitesDeBase: List<Capacitee>
 )

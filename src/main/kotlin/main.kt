@@ -13,7 +13,7 @@ fun main() {
     println(pikachu.pvActuels)
     pikachu.subirDegats(240)
     println(pikachu.pvActuels)
-    println(pikachu.estKo)
+    println(pikachu.estKO())
 
     val joueur1 = Joueur.creer("jean")
     println(joueur1.nom)
