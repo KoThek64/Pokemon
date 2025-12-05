@@ -1,5 +1,6 @@
 package modeles.classes
 
+import modeles.ActionDeCombat
 import modeles.exceptions.EquipePokemonException
 import modeles.exceptions.JoueurException
 import modeles.interfaces.Combattant
@@ -57,5 +58,40 @@ class Joueur private constructor(
         }
         this.argent-=argent
         return this.argent
+    }
+
+    fun choisirAction() : ActionDeCombat{
+        val pokemonActuel = equipe[0]
+        println("Nom : " + pokemonActuel.espece.nom + "; PV : " + pokemonActuel.pvActuels.toString() + "; Capacitées : " + pokemonActuel.competences.toString())
+        while (true){
+            println("\nChoix de l'action")
+            println("1. Attaque")
+            println("2. Changer de pokémon")
+            println("3. Fuite")
+            when(readln()) {
+                "1" -> {
+                    for (i in 0 until pokemonActuel.competences.size){
+                        println(i.toString() + " " + pokemonActuel.competences[i])
+                    }
+                    println("Veuillez choisir une capacitée")
+                    val choix = readln().toInt()
+                    return ActionDeCombat.Attaque(pokemonActuel.competences[choix])
+                }
+                "2" -> {
+                    for (i in 0 until equipe.size){
+                        if (!equipe[i].estKO()){
+                            println(i.toString() + " " + equipe[i].espece.nom)
+                        }
+                    }
+                    println("Veuillez choisir un pokémon")
+                    val choix = readln().toInt()
+                    return ActionDeCombat.ChangerDePokemon(choix)
+                }
+                "3" -> {
+                    return ActionDeCombat.Fuite
+                }
+                else -> println("Choix invalide veuillez recommencer")
+            }
+        }
     }
 }

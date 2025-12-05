@@ -35,4 +35,13 @@ fun main() {
     println(pokedex.trouverEspeceParNom("Salamèche"))
     println(pokedex.rechercherParType(Type.EAU))
 
+    val salameche = Pokemon.creer(pokedex.trouverEspeceParNom("Salamèche"), 50)
+    val carapuce = Pokemon.creer(pokedex.trouverEspeceParNom("Carapuce"), 50)
+
+    val adversaire1 = Adversaire("claude", mutableListOf(salameche))
+
+    joueur1.ajouterPokemon(carapuce)
+    println(joueur1.equipe)
+    Combat(joueur1, adversaire1).lancerCombat()
+
 }
