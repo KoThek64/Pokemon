@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "nom": "Écrase-face",
+    "categorie": "PHYSIQUE",
+    "stats": {
+      "puissance": 40,
+      "precision": 100,
+      "pp": 35,
+      "ppMax": 56
+    },
+    "type": "NORMAL"
+  },
+  {
+    "id": 2,
+    "nom": "Poing Karaté",
+    "categorie": "PHYSIQUE",
+    "stats": {
+      "puissance": 50,
+      "precision": 100,
+      "pp": 25,
+      "ppMax": 40
+    },
+    "type": "COMBAT"
+  },
+  {
+    "id": 33,
+    "nom": "Charge",
+    "categorie": "PHYSIQUE",
+    "stats": {
+      "puissance": 40,
+      "precision": 100,
+      "pp": 35,
+      "ppMax": 56
+    },
+    "type": "NORMAL"
+  },
+  {
+    "id": 10,
+    "nom": "Griffe",
+    "categorie": "PHYSIQUE",
+    "stats": {
+      "puissance": 40,
+      "precision": 100,
+      "pp": 35,
+      "ppMax": 56
+    },
+    "type": "NORMAL"
+  },
+  {
+    "id": 22,
+    "nom": "Fouet Lianes",
+    "categorie": "PHYSIQUE",
+    "stats": {
+      "puissance": 45,
+      "precision": 100,
+      "pp": 25,
+      "ppMax": 40
+    },
+    "type": "PLANTE"
+  },
+  {
+    "id": 53,
+    "nom": "Lance-Flammes",
+    "categorie": "SPECIALE",
+    "stats": {
+      "puissance": 90,
+      "precision": 100,
+      "pp": 15,
+      "ppMax": 24
+    },
+    "type": "FEU"
+  }
+]
