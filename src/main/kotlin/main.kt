@@ -14,23 +14,15 @@ fun lancerJeu() {
     val capaciteeDex = CapaciteeDex.chargerDepuisFichier("data/capacitee.json")
 
     val pikachu = Pokemon.creer(pokedex.trouverEspeceParNom("Pikachu"), 50, capaciteeDex)
-    println(pikachu.pvActuels)
-    println(pikachu.competences)
-    println(pikachu.stats)
-    println(pikachu.espece)
-    println(pikachu.niveau)
-    println(pikachu.competences)
+    val salameche = Pokemon.creer(pokedex.trouverEspeceParNom("Salamèche"), 50, capaciteeDex)
+    val carapuce = Pokemon.creer(pokedex.trouverEspeceParNom("Carapuce"), 50, capaciteeDex)
+    val bulbizarre = Pokemon.creer(pokedex.trouverEspeceParNom("Bulbizarre"), 50, capaciteeDex)
 
-    pikachu.apprendreCapacitee(22, capaciteeDex)
+    val joueur1 = Joueur.creer("Mattys")
+    val adversaire1 = Adversaire("claude", mutableListOf(salameche, bulbizarre))
 
-    println(pikachu.competences)
-
-//    val salameche = Pokemon.creer(pokedex.trouverEspeceParNom("Salamèche"), 50, capaciteeDex)
-//    val carapuce = Pokemon.creer(pokedex.trouverEspeceParNom("Carapuce"), 50, capaciteeDex)
-//
-//    val adversaire1 = Adversaire("claude", mutableListOf(salameche))
-//
-//    joueur1.ajouterPokemon(carapuce)
-//    println(joueur1.equipe)
-//    Combat(joueur1, adversaire1).lancerCombat()
+    joueur1.ajouterPokemon(carapuce)
+    joueur1.ajouterPokemon(pikachu)
+    println(joueur1.equipe)
+    Combat(joueur1, adversaire1, capaciteeDex).lancerCombat()
 }

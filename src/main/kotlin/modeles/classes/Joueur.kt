@@ -62,35 +62,73 @@ class Joueur private constructor(
 
     fun choisirAction() : ActionDeCombat{
         val pokemonActuel = equipe[0]
-        println("Nom : " + pokemonActuel.espece.nom + "; PV : " + pokemonActuel.pvActuels.toString() + "; Capacitées : " + pokemonActuel.competences.toString())
+
+        println("\n--- Tour de ${nom} ---")
+        println("Pokémon actif : ${pokemonActuel.espece.nom} (PV : ${pokemonActuel.pvActuels}/${pokemonActuel.stats.pv})")
+
         while (true){
-            println("\nChoix de l'action")
+            println("\nQuelle action voulez-vous effectuer ?")
             println("1. Attaque")
             println("2. Changer de pokémon")
             println("3. Fuite")
+
             when(readln()) {
                 "1" -> {
+                    println("\nAttaques disponibles :")
                     for (i in 0 until pokemonActuel.competences.size){
-                        println(i.toString() + " " + pokemonActuel.competences[i])
+                        println("$i. ${pokemonActuel.competences[i].nom} (${pokemonActuel.competences[i].ppActuels} PP)")
                     }
-                    println("Veuillez choisir une capacitée")
-                    val choix = readln().toInt()
-                    return ActionDeCombat.Attaque(pokemonActuel.competences[choix])
+
+                    println("Choisissez une attaque (numéro) :")
+                    val choix = readln().toIntOrNull()
+
+                    if (choix != null && choix >= 0 && choix < pokemonActuel.competences.size) {
+                        return ActionDeCombat.Attaque(pokemonActuel.competences[choix])
+                    } else {
+                        println("Choix d'attaque invalide.")
+                    }
                 }
                 "2" -> {
-                    for (i in 0 until equipe.size){
-                        if (!equipe[i].estKO()){
-                            println(i.toString() + " " + equipe[i].espece.nom)
-                        }
+                    if (equipe.size <= 1){
+                        println("Vous n'avez qu'un seul Pokémon ! Impossible de changer.")
+                        continue
                     }
-                    println("Veuillez choisir un pokémon")
-                    val choix = readln().toInt()
-                    return ActionDeCombat.ChangerDePokemon(choix)
+                    val pokemonsDisponibles = equipe.subList(1, equipe.size).filter { !it.estKO() }
+
+                    if (pokemonsDisponibles.isEmpty()) {
+                        println("Tous vos autres Pokémon sont KO ! Impossible de changer.")
+                        continue
+                    }
+
+                    println("\nChoisissez un Pokémon à envoyer :")
+                    for (i in 1 until equipe.size){
+                        val p = equipe[i]
+                        val etat = if (p.estKO()) "KO" else "${p.pvActuels} PV"
+                        println("$i. ${p.espece.nom} ($etat)")
+                    }
+                    println("0. Annuler (Retour)")
+
+                    val choix = readln().toIntOrNull()
+
+                    if (choix == 0) {
+                        continue
+                    }
+
+                    if (choix != null && choix > 0 && choix < equipe.size){
+                        val pokemonChoisi = equipe[choix]
+                        if (pokemonChoisi.estKO()) {
+                            println("Ce Pokémon est KO, il ne peut pas combattre !")
+                        } else {
+                            return ActionDeCombat.ChangerDePokemon(choix)
+                        }
+                    } else {
+                        println("Choix de Pokémon invalide.")
+                    }
                 }
                 "3" -> {
                     return ActionDeCombat.Fuite
                 }
-                else -> println("Choix invalide veuillez recommencer")
+                else -> println("Commande inconnue. Veuillez écrire 1, 2 ou 3.")
             }
         }
     }
