@@ -13,7 +13,7 @@
         "vitesse": 45
       },
       "description": "Un Pokémon plante qui porte un bulbe sur son dos.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 2,
@@ -28,7 +28,7 @@
         "vitesse": 60
       },
       "description": "L'évolution de Bulbizarre, son bulbe commence à s’ouvrir.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 3,
@@ -43,7 +43,7 @@
         "vitesse": 80
       },
       "description": "Une grande fleur a éclos sur son dos.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 4,
@@ -58,7 +58,7 @@
         "vitesse": 65
       },
       "description": "Un petit Pokémon feu, la flamme au bout de sa queue reflète sa santé.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 5,
@@ -73,7 +73,7 @@
         "vitesse": 80
       },
       "description": "L’évolution de Salamèche, plus agressif et plus puissant.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 6,
@@ -88,7 +88,7 @@
         "vitesse": 100
       },
       "description": "Un grand dragon qui crache des flammes brûlant tout sur leur passage.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 7,
@@ -103,7 +103,7 @@
         "vitesse": 43
       },
       "description": "Un Pokémon tortue qui se protège dans sa carapace.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 8,
@@ -118,7 +118,7 @@
         "vitesse": 58
       },
       "description": "L’évolution de Carapuce, plus robuste et expérimenté.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 9,
@@ -133,7 +133,7 @@
         "vitesse": 78
       },
       "description": "Un Pokémon imposant équipé de canons sur sa carapace.",
-      "capacitesDeBase": ["CHARGE"]
+      "capacitesDeBase": [1]
     },
     {
       "id": 25,
@@ -148,7 +148,7 @@
         "vitesse": 90
       },
       "description": "Un Pokémon souris qui stocke de l’électricité dans ses joues.",
-      "capacitesDeBase": ["CHARGE", "ATTAQUE_ECLAIR"]
+      "capacitesDeBase": [1]
     }
   ]
 }

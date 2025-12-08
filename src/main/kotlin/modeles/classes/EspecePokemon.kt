@@ -1,6 +1,5 @@
 package modeles.classes
 
-import modeles.enums.Capacitee
 import modeles.enums.Type
 import kotlinx.serialization.Serializable
 
@@ -11,5 +10,5 @@ data class EspecePokemon(
     val types: List<Type>,
     val baseStats: Stats,
     val description: String,
-    val capacitesDeBase: MutableList<Capacitee>
+    val capacitesDeBase: List<Int>
 )
