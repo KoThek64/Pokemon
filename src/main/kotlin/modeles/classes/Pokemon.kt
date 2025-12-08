@@ -1,6 +1,5 @@
 package modeles.classes
 
-import modeles.enums.Capacitee
 import kotlinx.serialization.Serializable
 import modeles.exceptions.CapaciteeException
 import modeles.exceptions.NiveauException
@@ -12,17 +11,27 @@ data class Pokemon(
     var niveau: Int,
     var stats: Stats,
     var pvActuels: Int,
-    var competences: MutableList<Capacitee>,
+    var competences: MutableList<CapaciteeApprise>,
 ){
     companion object{
-        fun creer(espece: EspecePokemon, niveau: Int) : Pokemon{
+        fun creer(espece: EspecePokemon, niveau: Int, capaciteeDex: CapaciteeDex) : Pokemon{
             val stats = calculerStatsFinal(espece, niveau)
+
+            val competences = espece.capacitesDeBase.map { idCapacitee ->
+                val data = capaciteeDex.getParId(idCapacitee)
+                CapaciteeApprise(
+                    idCapacitee,
+                    data.nom,
+                    data.stats.pp
+                )
+            }.toMutableList()
+
             return Pokemon(
                 espece,
                 niveau,
                 stats,
                 stats.pv,
-                espece.capacitesDeBase.toMutableList(),
+                competences
             )
         }
 
@@ -46,25 +55,35 @@ data class Pokemon(
         }
     }
 
-    fun apprendreCapacitee(capacitee: Capacitee) : Boolean{
-        if (competences.contains(capacitee)){
+    fun apprendreCapacitee(idCapacitee: Int, capaciteeDex: CapaciteeDex) : Boolean{
+        if (competences.any { it.id == idCapacitee }){
             throw CapaciteeException("On ne peut pas apprendre deux fois la même capacitée")
         } else if (competences.size == 4){
             throw CapaciteeException("On ne peut pas avoir plus de 4 capacitées")
         }
-        competences.add(capacitee)
+
+        val data = capaciteeDex.getParId(idCapacitee)
+        competences.add(
+            CapaciteeApprise(
+                idCapacitee,
+                data.nom,
+                data.stats.pp
+            )
+        )
         return true
     }
 
-    fun oublierCapacitee(capacitee: Capacitee) : Boolean{
-        if (!competences.contains(capacitee)){
-            throw CapaciteeException("On ne peut pas oublier une capacitée qui n'existe pas")
-        }
+    fun oublierCapacitee(idCapacitee: Int) : Boolean{
         if (competences.size == 1){
             throw CapaciteeException("On est obligé de garder au moins une capacitée")
         }
 
-        competences.remove(capacitee)
+        val index = competences.indexOfFirst { it.id == idCapacitee }
+        if (index == -1){
+            throw CapaciteeException("Le pokémon ne connait pas cette capacitée")
+        }
+
+        competences.removeAt(index)
         return true
     }
 

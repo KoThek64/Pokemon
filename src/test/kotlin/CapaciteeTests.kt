@@ -1,7 +1,6 @@
 import modeles.classes.EspecePokemon
 import modeles.classes.Pokedex
 import modeles.classes.Pokemon
-import modeles.enums.Capacitee
 import modeles.exceptions.CapaciteeException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -26,16 +25,16 @@ class CapaciteeTests {
     @Test
     fun apprendreCapaciteeOK(){
         assertEquals(salamecheE.capacitesDeBase, salameche.competences)
-        assertTrue { salameche.apprendreCapacitee(Capacitee.LANCE_FLAMME) }
+        assertTrue { salameche.apprendreCapacitee(Capacitee.LANCE_FLAMMES) }
     }
 
     @Test
     fun apprendreCapaciteeTrop(){
         assertEquals(salamecheE.capacitesDeBase, salameche.competences)
 
-        assertTrue { salameche.apprendreCapacitee(Capacitee.LANCE_FLAMME) }
+        assertTrue { salameche.apprendreCapacitee(Capacitee.LANCE_FLAMMES) }
         assertEquals(2, salameche.competences.size)
-        assertTrue { salameche.competences.contains(Capacitee.LANCE_FLAMME) }
+        assertTrue { salameche.competences.contains(Capacitee.LANCE_FLAMMES) }
 
         assertTrue { salameche.apprendreCapacitee(Capacitee.GRIFFE) }
         assertEquals(3, salameche.competences.size)
@@ -45,12 +44,12 @@ class CapaciteeTests {
         assertEquals(4, salameche.competences.size)
         assertTrue { salameche.competences.contains(Capacitee.ATTAQUE_ECLAIR) }
 
-        assertThrows<CapaciteeException> { salameche.apprendreCapacitee(Capacitee.FOUET_LIANE) }
+        assertThrows<CapaciteeException> { salameche.apprendreCapacitee(Capacitee.FOUET_LIANES) }
         assertEquals(4, salameche.competences.size)
-        assertFalse { salameche.competences.contains(Capacitee.FOUET_LIANE) }
+        assertFalse { salameche.competences.contains(Capacitee.FOUET_LIANES) }
 
         assertTrue {
-            salameche.competences.contains(Capacitee.LANCE_FLAMME)
+            salameche.competences.contains(Capacitee.LANCE_FLAMMES)
             salameche.competences.contains(Capacitee.CHARGE)
             salameche.competences.contains(Capacitee.ATTAQUE_ECLAIR)
             salameche.competences.contains(Capacitee.GRIFFE)
@@ -68,15 +67,15 @@ class CapaciteeTests {
 
     @Test
     fun oublierCapaciteeOK(){
-        salameche.apprendreCapacitee(Capacitee.LANCE_FLAMME)
+        salameche.apprendreCapacitee(Capacitee.LANCE_FLAMMES)
         assertTrue {
             salameche.competences.size == 2
             salameche.competences.contains(Capacitee.CHARGE)
-            salameche.competences.contains(Capacitee.LANCE_FLAMME)
+            salameche.competences.contains(Capacitee.LANCE_FLAMMES)
         }
 
         assertTrue {
-            salameche.oublierCapacitee(Capacitee.LANCE_FLAMME)
+            salameche.oublierCapacitee(Capacitee.LANCE_FLAMMES)
         }
 
         assertTrue {

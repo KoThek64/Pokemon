@@ -1,47 +1,36 @@
 import modeles.classes.*
-import modeles.enums.Capacitee
 import modeles.enums.Type
 
 fun main() {
+    try {
+        lancerJeu()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+fun lancerJeu() {
     val pokedex = Pokedex.chargerDepuisFichier("data/pokedex.json")
+    val capaciteeDex = CapaciteeDex.chargerDepuisFichier("data/capacitee.json")
 
-    val pikachuEspece = pokedex.especes.first { it.id == 25 }
-
-    val niveau = 50
-    val pikachu = Pokemon.creer(pikachuEspece, niveau)
-    val pikachu2 = Pokemon.creer(pikachuEspece, 57)
+    val pikachu = Pokemon.creer(pokedex.trouverEspeceParNom("Pikachu"), 50, capaciteeDex)
     println(pikachu.pvActuels)
-    pikachu.subirDegats(240)
-    println(pikachu.pvActuels)
-    println(pikachu.estKO())
+    println(pikachu.competences)
+    println(pikachu.stats)
+    println(pikachu.espece)
+    println(pikachu.niveau)
+    println(pikachu.competences)
 
-    val joueur1 = Joueur.creer("jean")
-    println(joueur1.nom)
+    pikachu.apprendreCapacitee(22, capaciteeDex)
 
-    joueur1.ajouterPokemon(pikachu)
-    joueur1.ajouterPokemon(pikachu2)
-    println(joueur1.equipe)
-    joueur1.supprimerPokemon(pikachu2)
-    println(joueur1.equipe)
+    println(pikachu.competences)
 
-    println(joueur1.aEncoreDesPokemon())
-    println(joueur1.getPokemonActif())
-
-    joueur1.ajouterPokemon(pikachu2)
-    println(joueur1.changerPokemonActif(1))
-    println(joueur1.getPokemonActif())
-
-    println(pokedex.trouverEspeceParID(25))
-    println(pokedex.trouverEspeceParNom("Salamèche"))
-    println(pokedex.rechercherParType(Type.EAU))
-
-    val salameche = Pokemon.creer(pokedex.trouverEspeceParNom("Salamèche"), 50)
-    val carapuce = Pokemon.creer(pokedex.trouverEspeceParNom("Carapuce"), 50)
-
-    val adversaire1 = Adversaire("claude", mutableListOf(salameche))
-
-    joueur1.ajouterPokemon(carapuce)
-    println(joueur1.equipe)
-    Combat(joueur1, adversaire1).lancerCombat()
-
+//    val salameche = Pokemon.creer(pokedex.trouverEspeceParNom("Salamèche"), 50, capaciteeDex)
+//    val carapuce = Pokemon.creer(pokedex.trouverEspeceParNom("Carapuce"), 50, capaciteeDex)
+//
+//    val adversaire1 = Adversaire("claude", mutableListOf(salameche))
+//
+//    joueur1.ajouterPokemon(carapuce)
+//    println(joueur1.equipe)
+//    Combat(joueur1, adversaire1).lancerCombat()
 }

@@ -2,7 +2,6 @@ package modeles.classes
 
 import kotlinx.serialization.Serializable
 import modeles.enums.CategorieCapacitee
-import modeles.classes.StatsCapacitee
 import modeles.enums.Type
 
 @Serializable
