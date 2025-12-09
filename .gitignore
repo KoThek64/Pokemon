@@ -1,75 +1,60 @@
-.gradle
+# --- Gradle & Build ---
+.gradle/
 build/
+/out/
+/bin/
+
+# Ignore le dossier wrapper/ sauf le jar (bonne pratique pour que le projet soit portable)
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+# Fichiers de configuration locale (ne jamais commiter ça)
+local.properties
+
+# --- IntelliJ IDEA (Configuration Projet) ---
+# On ignore le dossier global .idea mais on garde les configs utiles
+.idea/*
+# On ré-autorise les fichiers de config partagés (ceux présents dans votre image)
+!.idea/gradle.xml
+!.idea/misc.xml
+!.idea/vcs.xml
+!.idea/kotlinc.xml
+!.idea/modules.xml
+!.idea/compiler.xml
+!.idea/encodings.xml
+# On ignore absolument les fichiers purement personnels
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/shelf/
 *.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
 
-### Kotlin ###
-.kotlin
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
-.vscode/
-
-### Mac OS ###
-.DS_Store
-
-# Kotlin / JVM
+# --- Kotlin & Java ---
 *.class
+*.kotlin_module
 *.jar
 *.war
 *.ear
-*.kotlin_module
 
-# Build directories
-/build/
-target/
+# --- Eclipse (si un jour quelqu'un utilise Eclipse) ---
+.classpath
+.project
+.settings/
+.springBeans
 
-# Gradle
-.gradle/
-gradle-app.setting
+# --- VS Code ---
+.vscode/
 
-# Logs
+# --- OS Files ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Fichiers du Projet Spécifiques ---
+# Logs d'erreur
 *.log
 
-# IntelliJ IDEA / JetBrains
-.idea/
-
-# OS files
-Thumbs.db
-
-# Kotlin Native (si jamais)
-konan/**
-
-# Cache
-.cache/
+# Si vous créez un système de sauvegarde, ne versionnez pas les sauvegardes !
+# Exemple : si vous sauvegardez dans un dossier 'saves'
+saves/
+# Ou si vous générez des JSON temporaires à la racine
+*.save.json
