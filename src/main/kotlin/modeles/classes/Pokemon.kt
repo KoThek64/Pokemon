@@ -3,6 +3,7 @@ package modeles.classes
 import kotlinx.serialization.Serializable
 import modeles.exceptions.CapaciteeException
 import modeles.exceptions.NiveauException
+import modeles.exceptions.PPException
 import modeles.exceptions.PVException
 
 @Serializable
@@ -22,7 +23,8 @@ data class Pokemon(
                 CapaciteeApprise(
                     idCapacitee,
                     data.nom,
-                    data.stats.pp
+                    data.stats.pp,
+                    data.stats.ppMax
                 )
             }.toMutableList()
 
@@ -67,7 +69,8 @@ data class Pokemon(
             CapaciteeApprise(
                 idCapacitee,
                 data.nom,
-                data.stats.pp
+                data.stats.pp,
+                data.stats.ppMax
             )
         )
         return true
@@ -128,6 +131,26 @@ data class Pokemon(
         }
         pvActuels = stats.pv
         return pvActuels
+    }
+
+    fun soinPP(pp : Int, idCapacitee: Int) : Int{
+        if (competences[idCapacitee].ppActuels == competences[idCapacitee].ppMax){
+            throw PPException("Le nombre de pp est déjà au maximum sur cette capacitée")
+        }
+        if (pp >= competences[idCapacitee].ppMax){
+            competences[idCapacitee].ppActuels = competences[idCapacitee].ppMax
+            return competences[idCapacitee].ppActuels
+        }
+        competences[idCapacitee].ppActuels+=pp
+        return competences[idCapacitee].ppActuels
+    }
+
+    fun soinTotalPP(idCapacitee : Int) : Int{
+        if (competences[idCapacitee].ppActuels == competences[idCapacitee].ppMax){
+            throw PPException("Le nombre de pp est déjà au maximum sur cette capacitée")
+        }
+        competences[idCapacitee].ppActuels = competences[idCapacitee].ppMax
+        return competences[idCapacitee].ppActuels
     }
 
     fun estKO(): Boolean{
