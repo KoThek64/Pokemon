@@ -17,58 +17,76 @@ class Combat(
         if (joueur.equipe.isEmpty() || adversaire.equipe.isEmpty()){
             throw CombatException("Un des deux combattant n'a pas d'équipe pokémon")
         }
-        while (joueur.aEncoreDesPokemon() && adversaire.aEncoreDesPokemon()){
-            if (joueur.getPokemonActif().estKO()){
-                println("Votre pokémon est KO, veuillez en choisir un autre")
 
-                println("\nChoisissez un Pokémon à envoyer :")
+        while (joueur.aEncoreDesPokemon() && adversaire.aEncoreDesPokemon()){
+
+            while (joueur.getPokemonActif().estKO()){
+                println("\n⚠️ Votre Pokémon est KO !")
+                println("Choisissez un Pokémon à envoyer :")
+
                 for (i in 1 until joueur.equipe.size){
                     val p = joueur.equipe[i]
                     val etat = if (p.estKO()) "KO" else "${p.pvActuels} PV"
                     println("$i. ${p.espece.nom} ($etat)")
                 }
-                println("0. Annuler (Retour)")
 
                 val choix = readln().toIntOrNull()
-
-                if (choix == 0) {
-                    continue
-                }
 
                 if (choix != null && choix > 0 && choix < joueur.equipe.size){
                     val pokemonChoisi = joueur.equipe[choix]
                     if (pokemonChoisi.estKO()) {
-                        println("Ce Pokémon est KO, il ne peut pas combattre !")
+                        println("❌ Ce Pokémon est KO, il ne peut pas combattre !")
                     } else {
                         joueur.changerPokemonActif(choix)
-                        println("${joueur.nom} rappelle son Pokémon et envoie ${joueur.getPokemonActif().espece.nom} !")
+                        println("✅ ${joueur.nom} envoie ${joueur.getPokemonActif().espece.nom} !")
                     }
                 } else {
-                    println("Choix de Pokémon invalide.")
+                    println("❌ Choix invalide. Veuillez choisir un numéro valide.")
                 }
-            } else if (adversaire.getPokemonActif().estKO()){
+            }
 
-                val choix = Random.nextInt(1, adversaire.equipe.size)
+            if (adversaire.getPokemonActif().estKO()){
+                val choixPossibles = mutableListOf<Int>()
+                for (i in 1 until adversaire.equipe.size) {
+                    if (!adversaire.equipe[i].estKO()) {
+                        choixPossibles.add(i)
+                    }
+                }
 
-                if (choix > 0 && choix < adversaire.equipe.size) {
+                if (choixPossibles.isNotEmpty()) {
+                    val choix = choixPossibles.random()
                     adversaire.changerPokemonActif(choix)
-                    println("${adversaire.nom} rappelle son Pokémon et envoie ${adversaire.getPokemonActif().espece.nom} !")
+                    println("${adversaire.nom} envoie ${adversaire.getPokemonActif().espece.nom} !")
+                } else {
+                    // Si l'adversaire n'a plus de Pokémon, la boucle principale while(aEncoreDesPokemon) l'arrêtera
+                    break
                 }
             }
 
             val pokJ = joueur.getPokemonActif()
             val pokAdv = adversaire.getPokemonActif()
 
-            println("\nVotre pokémon actif : ${pokJ.espece.nom} (PV : ${pokJ.pvActuels}/${pokJ.stats.pv})")
-            println("Pokémon actif de l'adversaire : ${pokAdv.espece.nom} (PV : ${pokAdv.pvActuels}/${pokAdv.stats.pv})")
+            println("\n------------------------------------------------")
+            println("Votre pokémon : ${pokJ.espece.nom} (PV : ${pokJ.pvActuels}/${pokJ.stats.pv})")
+            println("Adversaire    : ${pokAdv.espece.nom} (PV : ${pokAdv.pvActuels}/${pokAdv.stats.pv})")
+            println("------------------------------------------------")
 
             val actionJoueur = joueur.choisirAction()
             val actionAdversaire = adversaire.choisirAction()
 
             if (actionJoueur is ActionDeCombat.Fuite || actionAdversaire is ActionDeCombat.Fuite){
+                println("🏃‍♂️ Un des combattants a pris la fuite !")
                 break
             }
+
             jouerTour(actionJoueur, actionAdversaire)
+        }
+
+        // Fin du combat
+        if (joueur.aEncoreDesPokemon()) {
+            println("\n🏆 VICTOIRE ! Vous avez gagné le combat !")
+        } else {
+            println("\n💀 DÉFAITE... Vous n'avez plus de Pokémon.")
         }
     }
 
