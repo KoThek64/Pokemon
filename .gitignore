@@ -1,60 +1,20 @@
-# --- Gradle & Build ---
+# Fichiers de build générés par Android/Gradle
+*.iml
 .gradle/
-build/
-/out/
-/bin/
-
-# Ignore le dossier wrapper/ sauf le jar (bonne pratique pour que le projet soit portable)
-!gradle/wrapper/gradle-wrapper.jar
-
-# Fichiers de configuration locale (ne jamais commiter ça)
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
 local.properties
 
-# --- IntelliJ IDEA (Configuration Projet) ---
-# On ignore le dossier global .idea mais on garde les configs utiles
-.idea/*
-# On ré-autorise les fichiers de config partagés (ceux présents dans votre image)
-!.idea/gradle.xml
-!.idea/misc.xml
-!.idea/vcs.xml
-!.idea/kotlinc.xml
-!.idea/modules.xml
-!.idea/compiler.xml
-!.idea/encodings.xml
-# On ignore absolument les fichiers purement personnels
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/usage.statistics.xml
-.idea/shelf/
-*.iws
+# Dossiers de build dans les modules
+/app/build/
 
-# --- Kotlin & Java ---
-*.class
-*.kotlin_module
-*.jar
-*.war
-*.ear
+# Fichiers Kotlin générés
+.kotlin/
 
-# --- Eclipse (si un jour quelqu'un utilise Eclipse) ---
-.classpath
-.project
-.settings/
-.springBeans
-
-# --- VS Code ---
-.vscode/
-
-# --- OS Files ---
-.DS_Store
+# Fichiers temporaires système
 Thumbs.db
-Desktop.ini
-
-# --- Fichiers du Projet Spécifiques ---
-# Logs d'erreur
-*.log
-
-# Si vous créez un système de sauvegarde, ne versionnez pas les sauvegardes !
-# Exemple : si vous sauvegardez dans un dossier 'saves'
-saves/
-# Ou si vous générez des JSON temporaires à la racine
-*.save.json
