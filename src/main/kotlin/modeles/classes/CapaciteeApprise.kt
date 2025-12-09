@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class CapaciteeApprise(
     val id : Int,
     val nom : String,
-    var ppActuels: Int
+    var ppActuels: Int,
+    val ppMax: Int
 )

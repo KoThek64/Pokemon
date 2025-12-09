@@ -64,7 +64,6 @@ class Joueur private constructor(
         val pokemonActuel = equipe[0]
 
         println("\n--- Tour de ${nom} ---")
-        println("Pokémon actif : ${pokemonActuel.espece.nom} (PV : ${pokemonActuel.pvActuels}/${pokemonActuel.stats.pv})")
 
         while (true){
             println("\nQuelle action voulez-vous effectuer ?")

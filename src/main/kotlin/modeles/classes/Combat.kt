@@ -20,7 +20,6 @@ class Combat(
         while (joueur.aEncoreDesPokemon() && adversaire.aEncoreDesPokemon()){
             if (joueur.getPokemonActif().estKO()){
                 println("Votre pokémon est KO, veuillez en choisir un autre")
-                val pokemonsDisponibles = joueur.equipe.subList(1, joueur.equipe.size).filter { !it.estKO() }
 
                 println("\nChoisissez un Pokémon à envoyer :")
                 for (i in 1 until joueur.equipe.size){
@@ -48,29 +47,24 @@ class Combat(
                     println("Choix de Pokémon invalide.")
                 }
             } else if (adversaire.getPokemonActif().estKO()){
-                val pokemonsDisponibles = adversaire.equipe.subList(1, adversaire.equipe.size).filter { !it.estKO() }
 
                 val choix = Random.nextInt(1, adversaire.equipe.size)
 
-                if (choix != null && choix > 0 && choix < adversaire.equipe.size) {
-                    val pokemonChoisi = adversaire.equipe[choix]
+                if (choix > 0 && choix < adversaire.equipe.size) {
                     adversaire.changerPokemonActif(choix)
                     println("${adversaire.nom} rappelle son Pokémon et envoie ${adversaire.getPokemonActif().espece.nom} !")
                 }
             }
 
+            val pokJ = joueur.getPokemonActif()
+            val pokAdv = adversaire.getPokemonActif()
+
+            println("\nVotre pokémon actif : ${pokJ.espece.nom} (PV : ${pokJ.pvActuels}/${pokJ.stats.pv})")
+            println("Pokémon actif de l'adversaire : ${pokAdv.espece.nom} (PV : ${pokAdv.pvActuels}/${pokAdv.stats.pv})")
 
             val actionJoueur = joueur.choisirAction()
-            var attaqueJoueur : CapaciteeApprise? = null
-            if (actionJoueur is ActionDeCombat.Attaque){
-                attaqueJoueur = actionJoueur.capacitee
-            }
-
             val actionAdversaire = adversaire.choisirAction()
-            var attaqueAdversaire : CapaciteeApprise? = null
-            if (actionAdversaire is ActionDeCombat.Attaque){
-                attaqueAdversaire = actionAdversaire.capacitee
-            }
+
             if (actionJoueur is ActionDeCombat.Fuite || actionAdversaire is ActionDeCombat.Fuite){
                 break
             }

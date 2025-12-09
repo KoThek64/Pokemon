@@ -23,6 +23,6 @@ fun lancerJeu() {
 
     joueur1.ajouterPokemon(carapuce)
     joueur1.ajouterPokemon(pikachu)
-    println(joueur1.equipe)
+
     Combat(joueur1, adversaire1, capaciteeDex).lancerCombat()
 }
