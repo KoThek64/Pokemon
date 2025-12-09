@@ -21,7 +21,7 @@ class Combat(
         while (joueur.aEncoreDesPokemon() && adversaire.aEncoreDesPokemon()){
 
             while (joueur.getPokemonActif().estKO()){
-                println("\n⚠️ Votre Pokémon est KO !")
+                println("\nVotre Pokémon est KO !")
                 println("Choisissez un Pokémon à envoyer :")
 
                 for (i in 1 until joueur.equipe.size){
@@ -35,13 +35,13 @@ class Combat(
                 if (choix != null && choix > 0 && choix < joueur.equipe.size){
                     val pokemonChoisi = joueur.equipe[choix]
                     if (pokemonChoisi.estKO()) {
-                        println("❌ Ce Pokémon est KO, il ne peut pas combattre !")
+                        println("Ce Pokémon est KO, il ne peut pas combattre !")
                     } else {
                         joueur.changerPokemonActif(choix)
-                        println("✅ ${joueur.nom} envoie ${joueur.getPokemonActif().espece.nom} !")
+                        println("${joueur.nom} envoie ${joueur.getPokemonActif().espece.nom} !")
                     }
                 } else {
-                    println("❌ Choix invalide. Veuillez choisir un numéro valide.")
+                    println("Choix invalide. Veuillez choisir un numéro valide.")
                 }
             }
 
@@ -74,8 +74,11 @@ class Combat(
             val actionJoueur = joueur.choisirAction()
             val actionAdversaire = adversaire.choisirAction()
 
-            if (actionJoueur is ActionDeCombat.Fuite || actionAdversaire is ActionDeCombat.Fuite){
-                println("🏃‍♂️ Un des combattants a pris la fuite !")
+            if (actionJoueur is ActionDeCombat.Fuite){
+                println("Vous avez pris la fuite !")
+                break
+            } else if (actionAdversaire is ActionDeCombat.Fuite){
+                println("L'adversaire a pris la fuite !")
                 break
             }
 
@@ -84,9 +87,9 @@ class Combat(
 
         // Fin du combat
         if (joueur.aEncoreDesPokemon()) {
-            println("\n🏆 VICTOIRE ! Vous avez gagné le combat !")
+            println("\nVICTOIRE ! Vous avez gagné le combat !")
         } else {
-            println("\n💀 DÉFAITE... Vous n'avez plus de Pokémon.")
+            println("\nDÉFAITE... Vous n'avez plus de Pokémon.")
         }
     }
 
