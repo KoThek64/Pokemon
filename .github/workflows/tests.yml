@@ -40,4 +40,18 @@ jobs:
       with:
         files: |
           build/test-results/test/*.xml
+        check_name: 'Résultats des Tests'
+        comment_title: '🧪 Résultats des Tests Kotlin'
+        report_individual_runs: true
+        deduplicate_classes_by_file_name: false
+        compare_to_earlier_commit: true
+        check_run_annotations: all tests, skipped tests
+
+    - name: Publier les rapports HTML de tests
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-reports
+        path: build/reports/tests/test/
+        retention-days: 30
 
