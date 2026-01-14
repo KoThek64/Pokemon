@@ -1,5 +1,9 @@
 # 🎮 Jeu Pokémon en CLI
 
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org/)
+[![JDK](https://img.shields.io/badge/JDK-21-orange?logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Un jeu Pokémon développé en Kotlin pour la ligne de commande, offrant une expérience de combat au tour par tour.
 
 > ⚠️ **Projet en développement actif** - De nombreuses fonctionnalités sont encore en cours d'implémentation.
