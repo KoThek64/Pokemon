@@ -21,6 +21,7 @@ fun lancerJeu() {
     val joueur1 = Joueur.creer("Mattys")
     val adversaire1 = Adversaire("claude", mutableListOf(salameche, bulbizarre))
 
+    print(pikachu.competences)
     joueur1.ajouterPokemon(carapuce)
     joueur1.ajouterPokemon(pikachu)
 

@@ -1,3 +1,4 @@
+import modeles.classes.CapaciteeDex
 import modeles.classes.EspecePokemon
 import modeles.classes.Pokedex
 import modeles.classes.Pokemon
@@ -12,23 +13,25 @@ class NiveauTests {
     lateinit var pokedex: Pokedex
     lateinit var salamecheE: EspecePokemon
     lateinit var salameche: Pokemon
+    lateinit var capaciteeDex: CapaciteeDex
 
     @BeforeEach
     fun init(){
+        capaciteeDex = CapaciteeDex.chargerDepuisFichier("data/capacitee.json")
         pokedex = Pokedex.chargerDepuisFichier("data/pokedex.json")
         salamecheE = pokedex.especes.first { it.nom == "Salamèche" }
     }
 
     @Test
     fun monterDeNiveauOK(){
-        salameche = Pokemon.creer(salamecheE, 1)
+        salameche = Pokemon.creer(salamecheE, 1, capaciteeDex)
         assertTrue { salameche.monterDeNiveau() }
         assertTrue { salameche.niveau == 2 }
     }
 
     @Test
     fun monterDeNiveauJusqua100(){
-        salameche = Pokemon.creer(salamecheE, 1)
+        salameche = Pokemon.creer(salamecheE, 1, capaciteeDex)
         for(i in 1 until 100){
             assertTrue { salameche.monterDeNiveau() }
         }
@@ -37,7 +40,7 @@ class NiveauTests {
 
     @Test
     fun monterDeNiveauAuDessusDe100(){
-        salameche = Pokemon.creer(salamecheE, 100)
+        salameche = Pokemon.creer(salamecheE, 100, capaciteeDex)
         assertThrows<NiveauException> { salameche.monterDeNiveau() }
         assertTrue { salameche.niveau == 100 }
     }

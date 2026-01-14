@@ -1,3 +1,4 @@
+import modeles.classes.CapaciteeDex
 import modeles.classes.EspecePokemon
 import modeles.classes.Pokedex
 import modeles.classes.Pokemon
@@ -11,12 +12,14 @@ class SoinsDegatsTest {
     lateinit var pokedex: Pokedex
     lateinit var salamecheE: EspecePokemon
     lateinit var salameche: Pokemon
+    lateinit var capaciteeDex: CapaciteeDex
 
     @BeforeEach
     fun init(){
+        capaciteeDex = CapaciteeDex.chargerDepuisFichier("data/capacitee.json")
         pokedex = Pokedex.chargerDepuisFichier("data/pokedex.json")
         salamecheE = pokedex.especes.first { it.nom == "Salamèche" }
-        salameche = Pokemon.creer(salamecheE, 50)
+        salameche = Pokemon.creer(salamecheE, 50, capaciteeDex)
     }
 
     @Test
@@ -29,7 +32,7 @@ class SoinsDegatsTest {
     fun degatsPasMoinsDe0(){
         salameche.subirDegats(salameche.pvActuels)
         assertEquals(0, salameche.pvActuels)
-        assertEquals(true, salameche.estKo)
+        assertEquals(true, salameche.estKO())
 
         assertThrows<PVException> {
             salameche.subirDegats(1)
@@ -49,11 +52,11 @@ class SoinsDegatsTest {
     fun soinKO(){
         salameche.subirDegats(salameche.pvActuels)
         assertEquals(0, salameche.pvActuels)
-        assertEquals(true, salameche.estKo)
+        assertEquals(true, salameche.estKO())
 
         salameche.soigner(50)
         assertEquals(50, salameche.pvActuels)
-        assertEquals(false, salameche.estKo)
+        assertEquals(false, salameche.estKO())
     }
 
     @Test
@@ -67,11 +70,11 @@ class SoinsDegatsTest {
     fun soinTotalKO(){
         salameche.subirDegats(salameche.pvActuels)
         assertEquals(0, salameche.pvActuels)
-        assertEquals(true, salameche.estKo)
+        assertEquals(true, salameche.estKO())
 
         salameche.soinTotal()
         assertEquals(salameche.stats.pv, salameche.pvActuels)
-        assertEquals(false, salameche.estKo)
+        assertEquals(false, salameche.estKO())
     }
 
     @Test
