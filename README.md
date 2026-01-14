@@ -10,7 +10,6 @@ Un jeu Pokémon développé en Kotlin pour la ligne de commande, offrant une exp
 - [Stack technique](#-stack-technique)
 - [Installation](#-installation)
 - [Architecture](#-architecture)
-- [Utilisation](#-utilisation)
 - [Tests](#-tests)
 - [Roadmap](#-roadmap)
 - [Contribution](#-contribution)
