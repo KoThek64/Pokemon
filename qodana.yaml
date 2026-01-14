@@ -20,5 +20,5 @@ profile:
 
 projectJDK: "21"
 
-linter: jetbrains/qodana-jvm:latest
+linter: jetbrains/qodana-jvm:2025.3
 

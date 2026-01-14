@@ -9,6 +9,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
 
     steps:
     - name: Checkout du code
@@ -31,11 +35,9 @@ jobs:
       run: ./gradlew test --no-daemon
 
     - name: Publication des résultats de tests
-      uses: dorny/test-reporter@v1
+      uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-        name: Résultats des tests
-        path: build/test-results/test/*.xml
-        reporter: java-junit
-        fail-on-error: true
+        files: |
+          build/test-results/test/*.xml
 
