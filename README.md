@@ -207,7 +207,7 @@ Le projet contient des tests unitaires pour les fonctionnalités principales :
 #### Améliorations techniques
 - [ ] **Tests d'intégration** complets
 - [ ] **Documentation KDoc**
-- [ ] **CI/CD** (GitHub Actions)
+- [x] **CI/CD** (GitHub Actions)
 - [ ] **Logs** structurés
 - [ ] **Configuration externe** (fichier config)
 - [ ] **Interface graphique** (JavaFX ou Compose Desktop)
