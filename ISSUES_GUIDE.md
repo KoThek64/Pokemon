@@ -143,12 +143,12 @@ Utilisez ces préfixes :
 Utilisez des préfixes clairs :
 
 ```bash
-feat: ajout du système d'évolution
-fix: correction validation PP
-docs: mise à jour du README
-test: ajout tests pour Combat
-refactor: simplification de CalculEfficacite
-chore: mise à jour Gradle
+feat: ajout de nouvelles fonctionnalités
+fix: correction de bug
+docs: mise à jour de documentation
+test: ajout ou modification de tests
+refactor: simplification de code sans changer le comportement
+chore: mise à jour de tâches annexes (CI, config, etc.)
 ```
 
 **Pourquoi ?** Vous comprendrez l'historique en un coup d'œil !

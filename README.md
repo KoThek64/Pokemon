@@ -90,6 +90,25 @@ Un jeu Pokémon développé en Kotlin pour la ligne de commande, offrant une exp
 - **Companion objects** pour les factories
 - **Exceptions personnalisées** pour la gestion d'erreurs
 
+### Gestion de Git 
+- **Branches Git** pour chaque fonctionnalité/bugfix
+- **GitHub Issues** pour le suivi des tâches
+- **Labels GitHub** pour organiser les issues
+- **Pull Requests** pour les revues de code
+- **GitHub Actions** pour l'intégration continue (CI)
+- **.gitignore** configuré pour Kotlin/Gradle
+
+### Conventions de commit
+Mis en place récemment pour une meilleure lisibilité de l'historique Git :
+```bash
+feat: ajout de nouvelles fonctionnalités
+fix: correction de bug
+docs: mise à jour de documentation
+test: ajout ou modification de tests
+refactor: simplification de code sans changer le comportement
+chore: mise à jour de tâches annexes (CI, config, etc.)
+```
+
 ## 📦 Installation
 
 ### Prérequis
