@@ -43,19 +43,19 @@ class CapaciteeTests {
         assertEquals(3, salameche.competences.size)
         assertTrue { salameche.competences.any { it.id == 10 } }
 
-        assertTrue { salameche.apprendreCapacitee(98, capaciteeDex) } // Vive-Attaque
+        assertTrue { salameche.apprendreCapacitee(2, capaciteeDex) } // Poing karaté
         assertEquals(4, salameche.competences.size)
-        assertTrue { salameche.competences.any { it.id == 98 } }
+        assertTrue { salameche.competences.any { it.id == 2 } }
 
         assertThrows<CapaciteeException> { salameche.apprendreCapacitee(22, capaciteeDex) } // Fouet Lianes
         assertEquals(4, salameche.competences.size)
         assertFalse { salameche.competences.any { it.id == 22 } }
 
         assertTrue {
+            salameche.competences.any { it.id == 1 } &&
             salameche.competences.any { it.id == 53 } &&
-            salameche.competences.any { it.id == 33 } &&
-            salameche.competences.any { it.id == 98 } &&
-            salameche.competences.any { it.id == 10 }
+            salameche.competences.any { it.id == 10 } &&
+            salameche.competences.any { it.id == 2 }
         }
     }
 
@@ -73,7 +73,7 @@ class CapaciteeTests {
         salameche.apprendreCapacitee(53, capaciteeDex) // Lance-Flammes
         assertTrue {
             salameche.competences.size == 2 &&
-            salameche.competences.any { it.id == 33 } && // Charge
+            salameche.competences.any { it.id == 1 } && // Ecrase-face
             salameche.competences.any { it.id == 53 } // Lance-Flammes
         }
 
@@ -83,7 +83,7 @@ class CapaciteeTests {
 
         assertTrue {
             salameche.competences.size == 1 &&
-            salameche.competences.any { it.id == 33 } // Charge
+            salameche.competences.any { it.id == 1 } // Ecrase-face
         }
     }
 
