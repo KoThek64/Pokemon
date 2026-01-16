@@ -51,7 +51,7 @@ Un jeu Pokémon développé en Kotlin pour la ligne de commande, offrant une exp
 
 #### Gestion des données
 - **Pokedex** chargé depuis JSON (151 Pokémon actuellement)
-- **Capacitedex** avec toutes les capacités depuis JSON
+- **CapacitéeDex** avec toutes les capacités depuis JSON
 - **Recherche de Pokémon** par nom ou ID
 - **Sérialisation/Désérialisation** avec Kotlinx Serialization
 
@@ -89,7 +89,7 @@ Un jeu Pokémon développé en Kotlin pour la ligne de commande, offrant une exp
 - **Companion objects** pour les factories
 - **Exceptions personnalisées** pour la gestion d'erreurs
 
-### Gestion de Git 
+### Workflow Git
 - **Branches Git** pour chaque fonctionnalité/bugfix
 - **GitHub Issues** pour le suivi des tâches
 - **Labels GitHub** pour organiser les issues
@@ -109,6 +109,10 @@ refactor: simplification de code sans changer le comportement
 chore: mise à jour de tâches annexes (CI, config, etc.)
 ```
 
+👀 **Curieux de voir ma gestion de projet ?** Jetez un œil aux [Issues](../../issues) et [Pull Requests](../../pulls) du repo !
+
+> ⚠️ **Note** : Ce projet est personnel et n'accepte pas de contributions externes.
+
 ## 📦 Installation
 
 ### Prérequis
@@ -119,7 +123,7 @@ chore: mise à jour de tâches annexes (CI, config, etc.)
 
 ```bash
 # Cloner le repository
-git clone <url-du-repo>
+git clone https://github.com/KoThek64/Pokemon.git
 cd Pokemon
 
 # Dans un terminal, pour compiler le projet
@@ -239,7 +243,9 @@ Le projet contient des tests unitaires pour les fonctionnalités principales :
 
 ## 📄 Licence
 
-Projet éducatif - Pokémon est une marque déposée de Nintendo/Game Freak.
+**Mon code** est sous licence [MIT](LICENSE) - tu peux t'en inspirer librement.
+
+**Pokémon**, les noms, sprites et concepts appartiennent à **Nintendo / Game Freak / The Pokémon Company**. Ce projet est purement éducatif et non commercial, fait par un fan pour apprendre. 🎓
 
 ---
 
