@@ -16,7 +16,6 @@ Un jeu Pokémon développé en Kotlin pour la ligne de commande, offrant une exp
 - [Architecture](#-architecture)
 - [Tests](#-tests)
 - [Roadmap](#-roadmap)
-- [Contribution](#-contribution)
 
 ## ✨ Fonctionnalités actuelles
 
@@ -102,6 +101,7 @@ Un jeu Pokémon développé en Kotlin pour la ligne de commande, offrant une exp
 Mis en place récemment pour une meilleure lisibilité de l'historique Git :
 ```bash
 feat: ajout de nouvelles fonctionnalités
+upgrade: Amélioration de fonctionnalités existantes
 fix: correction de bug
 docs: mise à jour de documentation
 test: ajout ou modification de tests
@@ -122,7 +122,7 @@ chore: mise à jour de tâches annexes (CI, config, etc.)
 git clone <url-du-repo>
 cd Pokemon
 
-# Compiler le projet
+# Dans un terminal, pour compiler le projet
 ./gradlew build
 
 # Lancer le jeu
@@ -236,23 +236,6 @@ Le projet contient des tests unitaires pour les fonctionnalités principales :
 - Pas de validation si un Pokémon essaie d'utiliser une capacité sans PP
 - L'IA adversaire choisit aléatoirement sans stratégie
 - Pas de gestion des attaques qui échouent
-
-## 🤝 Contribution
-
-Le projet est actuellement en développement personnel, mais les suggestions et retours sont les bienvenus !
-
-### Comment contribuer
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit vos changements (`git commit -m 'Add AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
-
-### Standards de code
-- Utiliser les **conventions Kotlin** standard
-- Ajouter des **tests** pour les nouvelles fonctionnalités
-- Documenter avec **KDoc** les fonctions publiques
-- Lever des **exceptions personnalisées** pour les erreurs métier
 
 ## 📄 Licence
 
