@@ -197,17 +197,14 @@ Le projet contient des tests unitaires pour les fonctionnalités principales :
 
 ## 🚀 Roadmap
 
-### 🔜 Prochaines fonctionnalités
+### 🔜 Idées de prochaines fonctionnalités
 
-#### Haute priorité
 - [ ] **Système d'évolution** (Salamèche → Reptincel → Dracaufeu)
 - [ ] **Menu principal** interactif
 - [ ] **Sauvegarde/Chargement** de partie
 - [ ] **Centre Pokémon** pour soigner l'équipe
 - [ ] **Magasin** pour acheter objets/Pokéballs
 - [ ] **Capture de Pokémon** sauvages
-
-#### Moyenne priorité
 - [ ] **Statuts** (Brûlure, Paralysie, Sommeil, Poison, Gel)
 - [ ] **Météo** (Pluie, Soleil, Tempête de sable, Grêle)
 - [ ] **Objets** (Potions, Antidotes, Pokéballs, etc.)
@@ -215,8 +212,6 @@ Le projet contient des tests unitaires pour les fonctionnalités principales :
 - [ ] **Capacités spéciales** (talents des Pokémon)
 - [ ] **Objets tenus** par les Pokémon
 - [ ] **Combat multiples** (2v2, 3v3)
-
-#### Basse priorité
 - [ ] **Badges** et progression
 - [ ] **Ligue Pokémon**
 - [ ] **Zones d'exploration** (routes, villes)
@@ -226,8 +221,6 @@ Le projet contient des tests unitaires pour les fonctionnalités principales :
 - [ ] **Shiny** Pokémon
 - [ ] **Natures** et IVs/EVs
 - [ ] **Méga-évolutions**
-
-#### Améliorations techniques
 - [ ] **Tests d'intégration** complets
 - [ ] **Documentation KDoc**
 - [x] **CI/CD** (GitHub Actions)
