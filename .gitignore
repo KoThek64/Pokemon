@@ -73,6 +73,7 @@ jacoco/
 # --- Secrets & Environment ---
 .env
 secrets.properties
+db.properties
 
 # Si vous créez un système de sauvegarde, ne versionnez pas les sauvegardes !
 # Exemple : si vous sauvegardez dans un dossier 'saves'
