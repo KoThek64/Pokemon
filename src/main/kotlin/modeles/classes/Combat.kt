@@ -5,13 +5,13 @@ import modeles.enums.CategorieCapacitee
 import modeles.enums.Type
 import modeles.exceptions.CombatException
 import modeles.objects.CalculEfficacite
+import repository.MoveRepository
 import kotlin.math.floor
 import kotlin.random.Random
 
 class Combat(
     private val joueur: Joueur,
-    private val adversaire: Adversaire,
-    private val capDex : CapaciteeDex
+    private val adversaire: Adversaire
 ) {
     fun lancerCombat(){
         if (joueur.equipe.isEmpty() || adversaire.equipe.isEmpty()){
@@ -103,8 +103,9 @@ class Combat(
         return total
     }
 
-    private fun calculerDegat(attaquant : Pokemon, defenseur : Pokemon, idCapacitee : Int) : Int{
-        val capData = capDex.getParId(idCapacitee)
+    private fun calculerDegat(attaquant : Pokemon, defenseur : Pokemon, idCapacitee : Int) : Int {
+        // On récupère les données de la capacité
+        val capData = MoveRepository.getParId(idCapacitee)
 
         val a : Int
         val d : Int
@@ -112,7 +113,7 @@ class Combat(
         val typeDefenseur1 = defenseur.espece.types[0]
         val typeDefenseur2 = if(defenseur.espece.types.size > 1) defenseur.espece.types[1] else null
 
-        when (capData.categorie){
+        when (capData.categorie) {
             CategorieCapacitee.PHYSIQUE -> {
                 a = attaquant.stats.attaque
                 d = defenseur.stats.defense
@@ -124,17 +125,17 @@ class Combat(
             CategorieCapacitee.STATUS -> return 0
         }
 
-        // Formule : ((((2 * Niveau / 5 + 2) * Puissance * A / D) / 50) + 2)
-        val puissance = capData.stats.puissance.toDouble()
+        val puissance = (capData.stats.puissance ?: 0).toDouble()
         val niveau = attaquant.niveau.toDouble()
 
-        var degatsBase = (floor((2.0 * niveau / 5.0 + 2.0)).toInt() * puissance * a.toDouble() / d.toDouble())
+        // Formule de dégâts officielle
+        var degatsBase = (floor(2.0 * niveau / 5.0 + 2.0).toInt() * puissance * a.toDouble() / d.toDouble())
         degatsBase = floor(degatsBase / 50.0) + 2.0
 
-        // STAB (Same Type Attaque Bonus) + Efficacite type
+        // STAB + Efficacité
         val stab = if (attaquant.espece.types.contains(capData.type)) 1.5 else 1.0
-        val efficaciteType = getEfficaciteType(capData.type, typeDefenseur1, typeDefenseur2)
-        val aleatoire = Random.nextDouble(0.85,1.0)
+        val efficaciteType = CalculEfficacite.getEfficaciteType(capData.type, typeDefenseur1, typeDefenseur2)
+        val aleatoire = Random.nextDouble(0.85, 1.0)
         val critique = 1.0
 
         return floor(degatsBase * stab * efficaciteType * aleatoire * critique).toInt()

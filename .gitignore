@@ -79,3 +79,6 @@ secrets.properties
 saves/
 # Ou si vous générez des JSON temporaires à la racine
 *.save.json
+
+# --- AI Assistant ---
+CLAUDE.md

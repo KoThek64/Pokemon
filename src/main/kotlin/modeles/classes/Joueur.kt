@@ -22,6 +22,21 @@ class Joueur private constructor(
             instance = joueur
             return joueur
         }
+
+        fun chargerDepuisSauvegarde(nom: String, equipe: MutableList<Pokemon>, argent: Double): Joueur {
+            if (instance != null) {
+                throw JoueurException("Il y a déjà un joueur créé pour cette partie")
+            }
+            val joueur = Joueur(nom, equipe, argent)
+            instance = joueur
+            return joueur
+        }
+
+        fun getInstance(): Joueur? = instance
+
+        fun reset() {
+            instance = null
+        }
     }
 
     fun ajouterPokemon(pokemon: Pokemon) : Boolean{
