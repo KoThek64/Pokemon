@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StatsCapacitee(
-    val puissance : Int,
-    val precision : Int,
-    val pp : Int,
-    val ppMax : Int
+    val puissance: Int?,
+    val precision: Int?,
+    val pp: Int,
+    val ppMax: Int
 )

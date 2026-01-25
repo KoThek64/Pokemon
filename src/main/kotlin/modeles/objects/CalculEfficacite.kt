@@ -106,4 +106,14 @@ object CalculEfficacite {
             }
         }
     }
+
+    fun getEfficaciteType(attaque: Type, def1: Type, def2: Type?): Double {
+        var multiplicateur = getMultiplicateur(attaque, def1)
+
+        if (def2 != null) {
+            multiplicateur *= getMultiplicateur(attaque, def2)
+        }
+
+        return multiplicateur
+    }
 }
