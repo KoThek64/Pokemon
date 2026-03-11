@@ -1,147 +1,149 @@
-# 🎮 Jeu Pokémon en CLI
+<h1 align="center">🎮 Pokémon CLI</h1>
+<p align="center"><em>Jeu Pokémon au tour par tour en ligne de commande, développé en Kotlin avec PostgreSQL et un import automatique des données depuis PokéAPI.</em></p>
 
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org/)
-[![JDK](https://img.shields.io/badge/JDK-21-orange?logo=openjdk&logoColor=white)](https://openjdk.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<p align="center">
+  <img src="https://img.shields.io/badge/Kotlin-2.2.20-7F52FF?logo=kotlin&logoColor=white" alt="Kotlin">
+  <img src="https://img.shields.io/badge/JDK-21-ED8B00?logo=openjdk&logoColor=white" alt="JDK 21">
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/Gradle-8.14-02303A?logo=gradle&logoColor=white" alt="Gradle">
+  <img src="https://img.shields.io/badge/License-MIT-22c55e" alt="MIT">
+</p>
 
-Un jeu Pokémon développé en Kotlin pour la ligne de commande, offrant une expérience de combat au tour par tour avec une base de données PostgreSQL et un import automatique des données depuis PokéAPI.
+---
 
-> ⚠️ **Projet en développement actif** - De nombreuses fonctionnalités sont encore en cours d'implémentation.
+## 📋 Contexte du projet
 
-## 📋 Table des matières
+**Pokémon CLI** est un projet personnel réalisé pour apprendre et pratiquer le développement Kotlin, en explorant la programmation orientée objet, les bases de données relationnelles, les appels API REST et les tests unitaires.
 
-- [Fonctionnalités actuelles](#-fonctionnalités-actuelles)
-- [Stack technique](#-stack-technique)
-- [Installation](#-installation)
-- [Architecture](#-architecture)
-- [Tests](#-tests)
-- [Roadmap](#-roadmap)
+| | |
+|---|---|
+| **Type** | Projet personnel |
+| **Auteur** | Mattys Lachaise |
+| **Année** | 2025 |
 
-## ✨ Fonctionnalités actuelles
+> ⚠️ **Projet en développement actif** — De nombreuses fonctionnalités sont encore en cours d'implémentation.
 
-### ✅ Implémenté
+---
 
-#### Base de données & Données
-- **Base de données PostgreSQL** via Exposed ORM (connexion configurée par `db.properties`)
-- **Import automatique depuis PokéAPI** au démarrage : 151 Pokémon et toutes leurs capacités (avec noms en français)
-- **Seeding intelligent** : skip automatique si les données sont déjà en base
-- **Pokedex** et **CapacitéeDex** legacy en JSON encore présents mais remplacés par la BD
+## 💡 Présentation
+
+**Pokémon CLI** est un jeu de combat Pokémon entièrement en ligne de commande. Les 151 Pokémon de la première génération et leurs capacités sont importés automatiquement depuis [PokéAPI](https://pokeapi.co/) et stockés dans une base PostgreSQL. Le jeu propose des combats au tour par tour, un système de niveaux, une gestion des capacités et une sauvegarde de partie.
+
+### Fonctionnalités
 
 #### Système de Pokémon
-- **Création de Pokémon** depuis la base de données
-- **Système de niveaux** (1-100) avec calcul automatique des stats
-- **18 types** disponibles (Eau, Feu, Plante, Électrique, etc.)
-- **Double-type** supporté
-- **Gestion des PV** (points de vie)
-- **Système de capacités** :
-  - Apprentissage de nouvelles capacités
-  - Maximum de 4 capacités par Pokémon
-  - Gestion des PP (points de pouvoir)
-  - Soins de PP et PV
+- **151 Pokémon** (1ère génération) avec leurs capacités, importés depuis PokéAPI
+- **Système de niveaux** (1–100) avec calcul automatique des 6 stats : PV, ATK, DEF, ATK SPÉ, DEF SPÉ, Vitesse
+- **18 types** disponibles, double-type supporté
+- **4 capacités max** par Pokémon, avec gestion des PP
 
 #### Système de Combat
-- **Combats au tour par tour** entre joueur et adversaire
-- **Calcul des dégâts** basé sur :
-  - Puissance de l'attaque
-  - Stats d'attaque/défense
-  - Efficacité de type (x0, x0.5, x1, x2, x4)
-  - STAB (bonus de type)
-  - Catégorie (Physique/Spécial/Statut)
-  - Variabilité aléatoire (85-100%)
-- **Actions disponibles** :
-  - Attaquer avec une capacité
-  - Changer de Pokémon
-  - Fuir le combat
-- **IA basique** pour l'adversaire
-- **Gestion du KO** et changement automatique de Pokémon
-- **Conditions de victoire/défaite**
+- **Combats au tour par tour** joueur vs adversaire IA
+- **Priorité par vitesse** : le Pokémon le plus rapide attaque en premier
+- **Calcul des dégâts** (formule officielle) : puissance, stats ATK/DEF ou ATK SPÉ/DEF SPÉ selon la catégorie, STAB, efficacité de type (x0 / x0.5 / x1 / x2 / x4), variabilité aléatoire (85–100%)
+- **Actions disponibles** : attaquer, changer de Pokémon, fuir
+- **Gestion du KO**, changement automatique et conditions de victoire/défaite
 
-#### Sauvegarde
-- **Sauvegarde de partie** en JSON local (`saves/joueur.json`)
-- **Chargement de partie** au démarrage
-- **DTO dédiés** pour la sérialisation (nom, argent, équipe, PP actuels)
-
-#### Système de Joueur
-- **Pattern Singleton** pour le joueur principal
-- **Équipe de Pokémon** (max 6)
-- **Gestion de l'argent**
-- **Adversaires** avec leurs propres équipes
+#### Données & Sauvegarde
+- **Base de données PostgreSQL** via Exposed ORM
+- **Seeding intelligent** : import automatique au 1er lancement, ignoré aux suivants
+- **Sauvegarde de partie** en JSON local (`saves/joueur.json`) : nom, argent, équipe complète avec niveaux, PV et PP actuels
 
 #### Panneau d'administration BD
 - **AdminBD** : outil CLI séparé pour administrer directement la base de données
-- Gestion complète des Pokémon (lister, rechercher par ID/nom/type, modifier, supprimer)
-- Gestion des capacités (lister, rechercher, modifier)
-- Gestion des liaisons Pokémon-Capacités
-- Stats rapides (compteurs, top Pokémon par nombre de capacités)
+- Lister, rechercher (par ID / nom / type), modifier et supprimer des Pokémon et capacités
+- Gestion des liaisons Pokémon ↔ Capacités et stats rapides
 
-#### Calculs de type
-- **Tableau complet d'efficacité** des 18 types
-- **Double-résistance** et **double-faiblesse** gérées
-- **Immunités** (x0 multiplicateur)
+---
 
 ## 🛠️ Stack technique
 
-### Langage & Runtime
-- **Kotlin** 2.2.20
-- **JVM** 21
-- **Coroutines** (pour les appels réseau asynchrones)
+| Composant | Technologie |
+|-----------|-------------|
+| **Langage** | Kotlin 2.2.20 |
+| **Runtime** | JDK 21 |
+| **Interface** | CLI (terminal) |
+| **Base de données** | PostgreSQL |
+| **ORM** | Exposed 0.41.1 (DSL + JDBC) |
+| **Client HTTP** | Ktor Client 2.3.7 (CIO + ContentNegotiation) |
+| **Sérialisation** | Kotlinx Serialization 1.6.0 |
+| **Build tool** | Gradle 8.14 (Kotlin DSL) |
+| **Coroutines** | Kotlinx Coroutines (appels réseau asynchrones) |
+| **Tests** | JUnit 5 + Kotlin Test |
+| **CI/CD** | GitHub Actions |
 
-### Bibliothèques
-- **Kotlinx Serialization** 1.6.0 - Sérialisation JSON
-- **Exposed** 0.41.1 - ORM Kotlin pour PostgreSQL (DSL + JDBC)
-- **PostgreSQL JDBC** 42.7.7 - Driver base de données
-- **Ktor Client** 2.3.7 - Client HTTP pour PokéAPI (CIO engine + ContentNegotiation)
-- **SLF4J Simple** 2.0.9 - Logging SQL
-- **JUnit 5** - Tests unitaires
-- **Kotlin Test** - Assertions et tests
+---
 
-### Build & Outils
-- **Gradle** 8.x (Kotlin DSL)
-- **Git** - Gestion de version
+## 📁 Architecture du projet
 
-### Architecture
-- **Programmation orientée objet**
-- **Data classes** pour les modèles et DTOs
-- **Sealed classes** pour les actions de combat
-- **Object singleton** pour les calculs d'efficacité et les repositories
-- **Companion objects** pour les factories
-- **Exceptions personnalisées** pour la gestion d'erreurs
-- **Pattern Repository** pour l'accès aux données
-- **Seeder pattern** pour l'import initial
-
-### Workflow Git
-- **Branches Git** pour chaque fonctionnalité/bugfix
-- **GitHub Issues** pour le suivi des tâches
-- **Labels GitHub** pour organiser les issues
-- **Pull Requests** pour les revues de code
-- **GitHub Actions** pour l'intégration continue (CI)
-- **.gitignore** configuré pour Kotlin/Gradle
-
-### Conventions de commit
-```bash
-feat: ajout de nouvelles fonctionnalités
-upgrade: Amélioration de fonctionnalités existantes
-fix: correction de bug
-docs: mise à jour de documentation
-test: ajout ou modification de tests
-refactor: simplification de code sans changer le comportement
-chore: mise à jour de tâches annexes (CI, config, etc.)
+```
+Pokemon/
+├── data/
+│   ├── pokedex.json                         # (legacy) ~151 Pokémon pour les tests
+│   └── capacitee.json                       # (legacy) Base des capacités pour les tests
+├── saves/
+│   └── joueur.json                          # Fichier de sauvegarde (généré au runtime)
+├── src/
+│   ├── main/kotlin/
+│   │   ├── main.kt                          # Point d'entrée : init BD, seeding, jeu
+│   │   ├── AdminBD.kt                       # Panneau d'administration CLI de la BD
+│   │   ├── database/
+│   │   │   ├── DatabaseFactory.kt           # Connexion PostgreSQL (lit db.properties)
+│   │   │   └── Table.kt                     # Tables Exposed (Pokémon, Capacités, Liaisons)
+│   │   ├── network/
+│   │   │   ├── PokeApiClient.kt             # Client HTTP Ktor pour PokéAPI
+│   │   │   └── dto/
+│   │   │       ├── PokemonDto.kt            # DTO réponses /pokemon/{id}
+│   │   │       └── MoveDto.kt              # DTO réponses /move/{id}
+│   │   ├── repository/
+│   │   │   ├── PokemonRepository.kt         # Requêtes BD : espèces Pokémon
+│   │   │   └── MoveRepository.kt            # Requêtes BD : capacités
+│   │   ├── service/
+│   │   │   ├── PokemonSeeder.kt             # Import des 151 Pokémon PokéAPI → BD
+│   │   │   └── MoveSeeder.kt               # Import des capacités PokéAPI → BD
+│   │   ├── sauvegarde/
+│   │   │   ├── SauvegardeService.kt         # Sauvegarde/Chargement de partie
+│   │   │   └── dto/SauvegardeDto.kt         # DTOs de sérialisation
+│   │   └── modeles/
+│   │       ├── ActionDeCombat.kt            # Sealed class : Attaque / Changement / Fuite
+│   │       ├── classes/                     # Joueur, Pokémon, Combat, Adversaire…
+│   │       ├── enums/                       # Type (18 types), CategorieCapacitee
+│   │       ├── exceptions/                  # Exceptions métier personnalisées
+│   │       ├── interfaces/                  # Combattant (commun à Joueur et Adversaire)
+│   │       └── objects/                     # CalculEfficacite (tableau des 18 types)
+│   └── test/kotlin/
+│       ├── CapaciteeTests.kt               # Tests : apprentissage et oubli de capacités
+│       ├── NiveauTests.kt                  # Tests : montée de niveau et limites
+│       └── SoinsDegatsTest.kt              # Tests : soins et dégâts (PV)
+├── .github/workflows/tests.yml             # Pipeline CI GitHub Actions
+├── build.gradle.kts                        # Configuration Gradle (Kotlin DSL)
+└── settings.gradle.kts
 ```
 
-👀 **Curieux de voir ma gestion de projet ?** Jetez un œil aux [Issues](../../issues) et [Pull Requests](../../pulls) du repo !
+| Fichier / Dossier | Description |
+|-------------------|-------------|
+| `main.kt` | Point d'entrée : initialise la BD, lance le seeding et démarre le jeu |
+| `AdminBD.kt` | Outil d'administration CLI de la base de données |
+| `database/` | Connexion PostgreSQL et définition des tables Exposed |
+| `network/` | Client Ktor pour PokéAPI et DTOs associés |
+| `repository/` | Pattern Repository : accès aux espèces Pokémon et aux capacités |
+| `service/` | Seeders : import des 151 Pokémon et de leurs capacités depuis PokéAPI |
+| `sauvegarde/` | Sauvegarde et chargement de partie en JSON |
+| `modeles/` | Logique métier : Pokémon, Combat, Types, Exceptions… |
 
-> ⚠️ **Note** : Ce projet est personnel et n'accepte pas de contributions externes.
+---
 
-## 📦 Installation
+## 🚀 Installation & Lancement
 
 ### Prérequis
+
 - Java 21 ou supérieur
-- Git
 - Un serveur **PostgreSQL** accessible
+- Git
 
 ### Configuration de la base de données
 
-Créez un fichier `db.properties` à la racine du projet (il est dans le `.gitignore`) :
+Créez un fichier `db.properties` à la racine du projet (ignoré par git) :
 
 ```properties
 db.host=<ADRESSE_DU_SERVEUR>
@@ -151,94 +153,27 @@ db.user=<UTILISATEUR>
 db.password=<MOT_DE_PASSE>
 ```
 
-### Étapes d'installation
+### Lancement
 
 ```bash
-# Cloner le repository
+# 1. Cloner le dépôt
 git clone https://github.com/KoThek64/Pokemon.git
 cd Pokemon
 
-# Compiler le projet
+# 2. Compiler le projet
 ./gradlew build
 
-# Lancer le jeu (importe automatiquement les données depuis PokéAPI au 1er démarrage)
+# 3. Lancer le jeu
 ./gradlew run
 ```
 
-> ℹ️ Au premier lancement, le jeu télécharge les 151 Pokémon et toutes leurs capacités depuis PokéAPI et les insère en base. Les lancements suivants ignorent ce seeding automatiquement.
+> ℹ️ Au **premier lancement**, le jeu télécharge automatiquement les 151 Pokémon et toutes leurs capacités depuis PokéAPI et les insère en base. Les lancements suivants ignorent ce seeding.
 
 ### Lancer le panneau d'administration BD
 
-L'`AdminBD` est un point d'entrée séparé à lancer directement depuis l'IDE (IntelliJ) en exécutant la fonction `main()` dans `AdminBD.kt`.
+`AdminBD` est un point d'entrée séparé à lancer depuis l'IDE (IntelliJ IDEA) en exécutant la fonction `main()` dans `AdminBD.kt`.
 
-## 🏗️ Architecture
-
-```
-src/main/kotlin/
-├── main.kt                              # Point d'entrée : init BD, seeding, jeu
-├── AdminBD.kt                           # Panneau d'administration CLI de la BD
-│
-├── database/
-│   ├── DatabaseFactory.kt               # Connexion PostgreSQL (lit db.properties)
-│   └── Table.kt                         # Tables Exposed (PokemonTable, CapaciteeTable, PokemonCapacitesTable)
-│
-├── network/
-│   ├── PokeApiClient.kt                 # Client HTTP Ktor configuré pour PokéAPI
-│   └── dto/
-│       ├── PokemonDto.kt                # DTO pour les réponses /pokemon/{id}
-│       └── MoveDto.kt                   # DTO pour les réponses /move/{id}
-│
-├── repository/
-│   ├── PokemonRepository.kt             # Requêtes BD : espèces Pokémon
-│   └── MoveRepository.kt               # Requêtes BD : capacités
-│
-├── service/
-│   ├── PokemonSeeder.kt                 # Import des 151 Pokémon depuis PokéAPI → BD
-│   └── MoveSeeder.kt                    # Import des capacités et liaisons depuis PokéAPI → BD
-│
-├── sauvegarde/
-│   ├── SauvegardeService.kt             # Sauvegarde/Chargement de partie (saves/joueur.json)
-│   └── dto/
-│       └── SauvegardeDto.kt             # DTOs de sauvegarde (JoueurSaveData, PokemonSaveData, CapaciteeSaveData)
-│
-└── modeles/
-    ├── ActionDeCombat.kt                # Sealed class : Attaque / ChangerDePokemon / Fuite
-    ├── classes/
-    │   ├── Adversaire.kt                # Adversaire IA
-    │   ├── CapaciteeApprise.kt          # Capacité avec PP actuels
-    │   ├── CapaciteeData.kt             # Données d'une capacité
-    │   ├── CapaciteeDex.kt              # (legacy) Chargement depuis JSON
-    │   ├── Combat.kt                    # Système de combat au tour par tour
-    │   ├── EspecePokemon.kt             # Espèce (stats de base, types, capacités)
-    │   ├── Joueur.kt                    # Joueur (singleton)
-    │   ├── Pokedex.kt                   # (legacy) Chargement depuis JSON
-    │   ├── Pokemon.kt                   # Instance d'un Pokémon
-    │   ├── Stats.kt                     # Stats d'un Pokémon
-    │   └── StatsCapacitee.kt            # Stats d'une capacité
-    ├── enums/
-    │   ├── CategorieCapacitee.kt        # PHYSIQUE / SPECIALE / STATUS
-    │   └── Type.kt                      # 18 types Pokémon
-    ├── exceptions/
-    │   ├── CapaciteeException.kt
-    │   ├── CombatException.kt
-    │   ├── EquipePokemonException.kt
-    │   ├── JoueurException.kt
-    │   ├── NiveauException.kt
-    │   ├── PokedexException.kt
-    │   ├── PPException.kt
-    │   └── PVException.kt
-    ├── interfaces/
-    │   └── Combattant.kt                # Interface commune Joueur / Adversaire
-    └── objects/
-        └── CalculEfficacite.kt          # Tableau complet d'efficacité des 18 types
-
-data/
-├── pokedex.json                         # (legacy) ~151 Pokémon
-└── capacitee.json                       # (legacy) Base des capacités
-
-saves/
-└── joueur.json                          # Fichier de sauvegarde (généré au runtime, gitignore)
-```
+---
 
 ## 🧪 Tests
 
@@ -253,56 +188,69 @@ saves/
 ```
 
 ### Couverture de tests
-- ✅ Système de capacités (apprentissage, oubli, doublons)
-- ✅ Système de niveaux (montée de niveau, limites)
-- ✅ Soins et dégâts (PV, PP)
-- ⏳ Combat (en cours)
-- ⏳ Équipe Pokémon (en cours)
 
-## 🚀 Roadmap
+| Domaine | État |
+|---------|------|
+| Système de capacités (apprentissage, oubli, doublons) | ✅ Couvert |
+| Système de niveaux (montée de niveau, limites) | ✅ Couvert |
+| Soins et dégâts (PV) | ✅ Couvert |
+| Combat | ⏳ En cours |
+| Équipe Pokémon | ⏳ En cours |
 
-### 🔜 Idées de prochaines fonctionnalités
-
-- [ ] **Système d'évolution** (Salamèche → Reptincel → Dracaufeu)
-- [ ] **Menu principal** interactif
-- [x] **Sauvegarde/Chargement** de partie
-- [ ] **Centre Pokémon** pour soigner l'équipe
-- [ ] **Magasin** pour acheter objets/Pokéballs
-- [ ] **Capture de Pokémon** sauvages
-- [ ] **Statuts** (Brûlure, Paralysie, Sommeil, Poison, Gel)
-- [ ] **Météo** (Pluie, Soleil, Tempête de sable, Grêle)
-- [ ] **Objets** (Potions, Antidotes, Pokéballs, etc.)
-- [ ] **Attaques statut** (Amélioration stats, baisse stats)
-- [ ] **Capacités spéciales** (talents des Pokémon)
-- [ ] **Objets tenus** par les Pokémon
-- [ ] **Combat multiples** (2v2, 3v3)
-- [ ] **Badges** et progression
-- [ ] **Ligue Pokémon**
-- [ ] **Zones d'exploration** (routes, villes)
-- [ ] **Système de quêtes**
-- [ ] **PNJ** et dialogues
-- [ ] **Élevage** et œufs
-- [ ] **Shiny** Pokémon
-- [ ] **Natures** et IVs/EVs
-- [ ] **Méga-évolutions**
-- [ ] **Tests d'intégration** complets
-- [ ] **Documentation KDoc**
-- [x] **CI/CD** (GitHub Actions)
-- [ ] **Logs** structurés
-- [ ] **Configuration externe** (fichier config)
-- [ ] **Interface graphique** (JavaFX ou Compose Desktop)
-- [ ] **Mode multijoueur** local
-
-### 🐛 Bugs connus
-- L'IA adversaire choisit aléatoirement sans stratégie
-- Pas de gestion des attaques qui échouent (précision non appliquée)
-
-## 📄 Licence
-
-**Mon code** est sous licence [MIT](LICENSE) - tu peux t'en inspirer librement.
-
-**Pokémon**, les noms, sprites et concepts appartiennent à **Nintendo / Game Freak / The Pokémon Company**. Ce projet est purement éducatif et non commercial, fait par un fan pour apprendre. 🎓
+Les tests s'exécutent automatiquement à chaque push sur `master` et `dev` via **GitHub Actions**.
 
 ---
 
-**Développé avec ❤️ en Kotlin**
+## 🔜 Roadmap
+
+### Prochaines fonctionnalités
+
+- [ ] Système d'évolution (Salamèche → Reptincel → Dracaufeu)
+- [ ] Menu principal interactif
+- [ ] Centre Pokémon pour soigner l'équipe
+- [ ] Magasin (objets, Pokéballs)
+- [ ] Capture de Pokémon sauvages
+- [ ] Statuts (Brûlure, Paralysie, Sommeil, Poison, Gel)
+- [ ] Météo (Pluie, Soleil, Tempête de sable, Grêle)
+- [ ] Objets tenus par les Pokémon
+- [ ] Badges et progression
+- [ ] Zones d'exploration (routes, villes)
+- [ ] Natures et IVs/EVs
+- [ ] Tests d'intégration complets
+- [ ] Documentation KDoc
+- [ ] Interface graphique (JavaFX ou Compose Desktop)
+
+### Déjà réalisé
+
+- [x] Sauvegarde / Chargement de partie
+- [x] CI/CD (GitHub Actions)
+- [x] Import PokéAPI → PostgreSQL
+
+### 🐛 Bugs connus
+
+- L'IA adversaire choisit toujours la première capacité disponible, sans stratégie
+- Précision des attaques non appliquée
+
+---
+
+## 🧑‍💻 Auteur
+
+Développé par **Mattys Lachaise** — [mattys.contact@gmail.com](mailto:mattys.contact@gmail.com)
+
+**Curieux de voir ma gestion de projet ?** Jetez un œil aux [Issues](../../issues) et [Pull Requests](../../pulls) du repo !
+
+> ⚠️ Ce projet est personnel et n'accepte pas de contributions externes.
+
+---
+
+## 📃 Licence
+
+**Mon code** est sous licence [MIT](LICENSE) — tu peux t'en inspirer librement.
+
+**Pokémon**, les noms et concepts appartiennent à **Nintendo / Game Freak / The Pokémon Company**. Ce projet est purement éducatif et non commercial, réalisé par un fan pour apprendre.
+
+---
+
+<p align="center">
+  Projet réalisé avec ❤️ pour apprendre le développement Kotlin
+</p>
