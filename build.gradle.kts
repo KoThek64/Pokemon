@@ -22,6 +22,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("org.postgresql:postgresql:42.7.7")
+    implementation("com.h2database:h2:2.2.224")
 
     // --- NETWORK (Ktor pour PokéAPI) ---
     implementation("io.ktor:ktor-client-core:${ktorVersion}")

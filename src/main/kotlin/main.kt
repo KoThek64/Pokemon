@@ -97,6 +97,10 @@ fun creerPokemonDepuisBD(nomEspece: String, niveau: Int): Pokemon {
 }
 
 suspend fun initBD(seedPokemon: Boolean = true, seedMoves: Boolean = true) {
+    if (database.DatabaseFactory.isLocal) {
+        service.LocalDataSeeder.seed()
+        return
+    }
     if (seedPokemon) PokemonSeeder.seedPokemon(1..151)
     if (seedMoves) MoveSeeder.seedAll(1..151)
 }

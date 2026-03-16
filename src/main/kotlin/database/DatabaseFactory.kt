@@ -7,23 +7,36 @@ import java.io.File
 import java.util.Properties
 
 object DatabaseFactory {
+    var isLocal: Boolean = false
+        private set
+
     fun init() {
         val config = loadConfig()
+        val mode = config.getProperty("db.mode", "remote")
 
-        val host = config.getProperty("db.host")
-        val port = config.getProperty("db.port")
-        val dbName = config.getProperty("db.name")
-        val user = config.getProperty("db.user")
-        val password = config.getProperty("db.password")
+        if (mode == "local") {
+            isLocal = true
+            Database.connect(
+                url = "jdbc:h2:mem:pokemon_db;DB_CLOSE_DELAY=-1",
+                driver = "org.h2.Driver"
+            )
+            transaction {
+                SchemaUtils.create(PokemonTable, CapaciteeTable, PokemonCapacitesTable)
+                println("✅ Base H2 locale créée.")
+            }
+        } else {
+            val host = config.getProperty("db.host")
+            val port = config.getProperty("db.port")
+            val dbName = config.getProperty("db.name")
+            val user = config.getProperty("db.user")
+            val password = config.getProperty("db.password")
 
-        val url = "jdbc:postgresql://$host:$port/$dbName"
-        val driver = "org.postgresql.Driver"
+            Database.connect("jdbc:postgresql://$host:$port/$dbName", "org.postgresql.Driver", user, password)
 
-        Database.connect(url, driver, user, password)
-
-        transaction {
-            SchemaUtils.create(PokemonTable, CapaciteeTable, PokemonCapacitesTable)
-            println("✅ Connexion PostgreSQL établie et tables synchronisées.")
+            transaction {
+                SchemaUtils.create(PokemonTable, CapaciteeTable, PokemonCapacitesTable)
+                println("✅ Connexion PostgreSQL établie et tables synchronisées.")
+            }
         }
     }
 
