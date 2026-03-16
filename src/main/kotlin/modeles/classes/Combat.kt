@@ -76,7 +76,8 @@ class Combat(
 
             if (actionJoueur is ActionDeCombat.Fuite){
                 println("Vous avez pris la fuite !")
-                break
+                println("\nDÉFAITE... Vous avez fuit le combat.")
+                return
             } else if (actionAdversaire is ActionDeCombat.Fuite){
                 println("L'adversaire a pris la fuite !")
                 break
